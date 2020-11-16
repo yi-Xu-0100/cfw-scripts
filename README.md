@@ -1,4 +1,4 @@
-## ⚡️ cfw-scripts
+# CFW Scripts
 
 [![sync2gitee(list)](<https://github.com/yi-Xu-0100/hub-mirror/workflows/sync2gitee(list)/badge.svg>)](https://github.com/yi-Xu-0100/hub-mirror)
 [![Github last commit](https://img.shields.io/github/last-commit/yi-Xu-0100/cfw-scripts)](https://github.com/yi-Xu-0100/cfw-scripts)
@@ -9,13 +9,12 @@
 [![GitHub clones](https://raw.githubusercontent.com/yi-Xu-0100/cfw-scripts/traffic/traffic-cfw-scripts/clones.svg)](https://github.com/yi-Xu-0100/cfw-scripts#README)
 [![GitHub clones](https://raw.githubusercontent.com/yi-Xu-0100/cfw-scripts/traffic/traffic-cfw-scripts/clones_per_week.svg)](https://github.com/yi-Xu-0100/cfw-scripts#README)
 
-Some scripts for parser in [clash.for.windows](https://github.com/Fndroid/clash_for_windows_pkg).
+Some scripts for parser in [Fndroid/clash_for_windows_pkg](https://github.com/Fndroid/clash_for_windows_pkg).
 
 **Only for studying and testing usage, and delete code yourself with the usage completed. Thanks!** 😜
 
 ## 🎨 Table of Contents
 
-- [⚡️ cfw-scripts](#️-cfw-scripts)
 - [🎨 Table of Contents](#-table-of-contents)
 - [📝 Scripts](#-scripts)
 - [🍱 Library](#-library)
