@@ -1,0 +1,56 @@
+{
+  "name": "cfw-scripts",
+  "version": "0.0.0",
+  "description": "Some scripts for parser in [clash.for.windows](https://github.com/Fndroid/clash_for_windows_pkg).",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "lint-check": "prettier --check **/*.{js,yml,yaml,json,md} && eslint .",
+    "format": "prettier --write **/*.{js,yml,yaml,json,md} && eslint .",
+    "clear": "rimraf -rf scripts/variables.json"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "echo 'pre-commit...' && lint-staged && npm run lint-check"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js}": [
+      "prettier --write",
+      "git add",
+      "eslint"
+    ],
+    "**/*.{md,json,yml}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yi-Xu-0100/cfw-scripts.git"
+  },
+  "keywords": [
+    "node",
+    "CFW",
+    "parser",
+    "scripts"
+  ],
+  "author": "yi_Xu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yi-Xu-0100/cfw-scripts/issues"
+  },
+  "homepage": "https://github.com/yi-Xu-0100/cfw-scripts#readme",
+  "dependencies": {
+    "node-notifier": "^8.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.13.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.5.1",
+    "prettier": "^2.1.2",
+    "rimraf": "^3.0.2"
+  }
+}

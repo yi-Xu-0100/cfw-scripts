@@ -1,0 +1,69 @@
+name: autoRelease
+
+on:
+  push:
+
+jobs:
+  run:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.3.4
+
+      - name: Add compare versions package
+        run: npm install compare-versions
+
+      - name: Get latest release
+        uses: actions/github-script@v3.0.0
+        id: get-latest-release
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          result-encoding: string
+          script: |
+            try {
+                var latestRelease = await github.repos.getLatestRelease({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo
+                });
+                return latestRelease.data.tag_name;
+            } catch (error) {
+                if (error.message === 'Not Found') {
+                    return '0.0.0';
+                } else {
+                    core.setFailed(error.message)
+                }
+            }
+
+      - name: Get changelog
+        id: changelog-reader
+        uses: mindsers/changelog-reader-action@v2.0.0
+        with:
+          path: ./CHANGELOG.md
+
+      - name: Compare version
+        uses: actions/github-script@v3.0.0
+        id: comparison
+        env:
+          currentVersion: ${{ steps.changelog-reader.outputs.version }}
+          latestRelease: ${{ steps.get-latest-release.outputs.result }}
+        with:
+          result-encoding: string
+          script: |
+            const compareVersions = require(`${process.env.GITHUB_WORKSPACE}/node_modules/compare-versions`);
+            var currentVersion = `${process.env.currentVersion}`;
+            var latestRelease = `${process.env.latestRelease}`;
+            return compareVersions.compare(currentVersion, latestRelease, ">");
+
+      - name: Create release
+        if: steps.comparison.outputs.result == 'true'
+        id: create_release
+        uses: actions/create-release@v1.1.4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.changelog-reader.outputs.version }}
+          release_name: Release v${{ steps.changelog-reader.outputs.version }}
+          body: ${{ steps.changelog-reader.outputs.changes }}
+          draft: ${{ steps.changelog-reader.outputs.status == 'unreleased' }}
+          prerelease: ${{ steps.changelog-reader.outputs.status == 'prereleased' }}
