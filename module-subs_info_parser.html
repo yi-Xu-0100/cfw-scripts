@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>change-keys.js - Documentation</title>
+    <title>subs_info_parser - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,43 +29,128 @@
 
 <div id="main">
     
-    <h1 class="page-title">change-keys.js</h1>
+    <h1 class="page-title">subs_info_parser</h1>
     
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @module change_keys
- * @description The script used to change keys.
- */
+        
+            
+        
+    
+</header>
 
-const { notify } = require('../lib/notify');
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>The script used to get subscription information of user.</p></div>
+        
 
-let change_keys = (raw, { yaml, console }, { name }) => {
-  try {
-    const rawObj = yaml.parse(raw);
-    const { Rule: rules = [], 'Proxy Group': groups = [], Proxy: proxies = [] } = rawObj;
-    delete rawObj['Rule'];
-    delete rawObj['Proxy Group'];
-    delete rawObj['Proxy'];
-    notify(`Keys in ${name} successfully changed`, 'profile modified in new keys', false);
-    return yaml.stringify({ ...rawObj, proxies, 'proxy-groups': groups, rules });
-  } catch (e) {
-    console.log(`[error]: ${e}`);
-    notify(`${name} change keys failed`, e.message);
-    throw e;
-  }
-};
+        
+            
+<div class="section-method">
 
-module.exports.parse = change_keys;
-</code></pre>
-        </article>
-    </section>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="subs-info-parser.js.html">subs-info-parser.js</a>, <a href="subs-info-parser.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
