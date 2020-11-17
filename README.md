@@ -4,10 +4,10 @@
 [![Github last commit](https://img.shields.io/github/last-commit/yi-Xu-0100/cfw-scripts)](https://github.com/yi-Xu-0100/cfw-scripts)
 [![Github license](https://img.shields.io/github/license/yi-Xu-0100/cfw-scripts)](./LICENSE)
 
-[![GitHub views](https://raw.githubusercontent.com/yi-Xu-0100/cfw-scripts/traffic/traffic-cfw-scripts/views.svg)](https://github.com/yi-Xu-0100/cfw-scripts#README)
-[![GitHub views](https://raw.githubusercontent.com/yi-Xu-0100/cfw-scripts/traffic/traffic-cfw-scripts/views_per_week.svg)](https://github.com/yi-Xu-0100/cfw-scripts#README)
-[![GitHub clones](https://raw.githubusercontent.com/yi-Xu-0100/cfw-scripts/traffic/traffic-cfw-scripts/clones.svg)](https://github.com/yi-Xu-0100/cfw-scripts#README)
-[![GitHub clones](https://raw.githubusercontent.com/yi-Xu-0100/cfw-scripts/traffic/traffic-cfw-scripts/clones_per_week.svg)](https://github.com/yi-Xu-0100/cfw-scripts#README)
+[![views](https://raw.githubusercontent.com/yi-Xu-0100/traffic2badge/traffic/traffic-cfw-scripts/views.svg)](https://github.com/yi-Xu-0100/traffic2badge/tree/traffic#-cfw-scripts)
+[![views per week](https://raw.githubusercontent.com/yi-Xu-0100/traffic2badge/traffic/traffic-cfw-scripts/views_per_week.svg)](https://github.com/yi-Xu-0100/traffic2badge/tree/traffic#-cfw-scripts)
+[![clones](https://raw.githubusercontent.com/yi-Xu-0100/traffic2badge/traffic/traffic-cfw-scripts/clones.svg)](https://github.com/yi-Xu-0100/traffic2badge/tree/traffic#-cfw-scripts)
+[![clones per week](https://raw.githubusercontent.com/yi-Xu-0100/traffic2badge/traffic/traffic-cfw-scripts/clones_per_week.svg)](https://github.com/yi-Xu-0100/traffic2badge/tree/traffic#-cfw-scripts)
 
 Some scripts for parser in [Fndroid/clash_for_windows_pkg](https://github.com/Fndroid/clash_for_windows_pkg).
 
