@@ -1,13 +1,9 @@
 /**
- * @module scripts
+ * @module change_keys
+ * @description The script used to change keys.
  */
 
 const { notify } = require('../lib/notify');
-
-/**
- * @function change_keys
- * @description The script used to change keys.
- */
 
 let change_keys = (raw, { yaml, console }, { name }) => {
   try {

@@ -1,18 +1,14 @@
 /**
- * @module scripts
- */
-
-const { notify } = require('../lib/notify');
-const variables = require('./variables.json')['auto-check-in'];
-
-/**
- * @function auto_check_in
+ * @module auto_check_in
  * @description The script used to automatic check in.
  * @param {string[]} [domains = []] - The site of domain will be check in.
  * @param {string[]} [keep = []] - Value of keep.
  * @param {string[]} [email = []] - Value of email.
  * @param {string[]} [pwd = []] - Value of pwd.
  */
+
+const { notify } = require('../lib/notify');
+const variables = require('./variables.json')['auto-check-in'];
 
 let auto_check_in = async (raw, { axios, console }) => {
   console.log('[info]: auto-check-in variables:');

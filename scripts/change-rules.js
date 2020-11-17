@@ -1,13 +1,9 @@
 /**
- * @module scripts
+ * @module change_rules
+ * @description The script used to change rules.
  */
 
 const { notify } = require('../lib/notify');
-
-/**
- * @function change_rules
- * @description The script used to change rules.
- */
 
 let change_rules = (raw, { yaml, console }, { name }) => {
   try {

@@ -1,5 +1,6 @@
 /**
- * @module scripts
+ * @module subs_info_parser
+ * @description The script used to get subscription information of user.
  */
 
 const { notify } = require('../lib/notify');
@@ -13,11 +14,6 @@ const traffic = num => {
   }
   return `${idx === 0 ? num : num.toFixed(2)} ${s[idx]}`;
 };
-
-/**
- * @function subs_info_parser
- * @description The script used to get subscription information of user.
- */
 
 let subs_info_parser = async (raw, { axios, console }, { url, name }) => {
   try {
