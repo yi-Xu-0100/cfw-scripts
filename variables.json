@@ -1,7 +1,7 @@
 {
   "auto-check-in": {
     "domains": [],
-    "remember_me": [],
+    "keep": [],
     "email": [],
     "pwd": []
   }

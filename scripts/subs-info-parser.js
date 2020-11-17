@@ -1,3 +1,7 @@
+/**
+ * @module scripts
+ */
+
 const { notify } = require('../lib/notify');
 
 const traffic = num => {
@@ -10,7 +14,12 @@ const traffic = num => {
   return `${idx === 0 ? num : num.toFixed(2)} ${s[idx]}`;
 };
 
-module.exports.parse = async (raw, { axios, console }, { url, name }) => {
+/**
+ * @function subs_info_parser
+ * @description The script used to get subscription information of user.
+ */
+
+let subs_info_parser = async (raw, { axios, console }, { url, name }) => {
   try {
     console.log(`[info]: start fetch subscription-userinfo at ${new Date()}`);
     const { headers: { 'subscription-userinfo': info } = {} } = await axios.head(url);
@@ -35,3 +44,5 @@ module.exports.parse = async (raw, { axios, console }, { url, name }) => {
     throw e;
   }
 };
+
+module.exports.parse = subs_info_parser;

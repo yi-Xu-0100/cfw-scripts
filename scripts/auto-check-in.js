@@ -1,13 +1,26 @@
-const { notify } = require('../lib/notify');
+/**
+ * @module scripts
+ */
 
-module.exports.parse = async (raw, { axios, console }) => {
-  let variables = require('./variables.json')['auto-check-in'];
+const { notify } = require('../lib/notify');
+const variables = require('./variables.json')['auto-check-in'];
+
+/**
+ * @function auto_check_in
+ * @description The script used to automatic check in.
+ * @param {string[]} [domains = []] - The site of domain will be check in.
+ * @param {string[]} [keep = []] - Value of keep.
+ * @param {string[]} [email = []] - Value of email.
+ * @param {string[]} [pwd = []] - Value of pwd.
+ */
+
+let auto_check_in = async (raw, { axios, console }) => {
   console.log('[info]: auto-check-in variables:');
   console.log(JSON.stringify(variables, null, 2));
   let domains = variables.domains;
   console.log(`[info]: ${domains}`);
-  let remember_me = variables.remember_me;
-  console.log(`[info]: ${remember_me}`);
+  let keep = variables.keep;
+  console.log(`[info]: ${keep}`);
   let email = variables.email;
   console.log(`[info]: ${email}`);
   let pwd = variables.pwd;
@@ -33,7 +46,7 @@ module.exports.parse = async (raw, { axios, console }) => {
         let resp = await axios.post(`https://${domains[i]}/auth/login`, {
           email: email[i],
           passwd: pwd[i],
-          remember_me: remember_me[i]
+          remember_me: keep[i]
         });
         console.log(`[info]: response of https://${domains[i]}/auth/login`);
         console.log(JSON.stringify(resp.data, null, 2));
@@ -56,3 +69,5 @@ module.exports.parse = async (raw, { axios, console }) => {
     throw e;
   }
 };
+
+module.exports.parse = auto_check_in;

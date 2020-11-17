@@ -1,6 +1,15 @@
+/**
+ * @module scripts
+ */
+
 const { notify } = require('../lib/notify');
 
-module.exports.parse = (raw, { yaml, console }, { name }) => {
+/**
+ * @function change_keys
+ * @description The script used to change keys.
+ */
+
+let change_keys = (raw, { yaml, console }, { name }) => {
   try {
     const rawObj = yaml.parse(raw);
     const { Rule: rules = [], 'Proxy Group': groups = [], Proxy: proxies = [] } = rawObj;
@@ -15,3 +24,5 @@ module.exports.parse = (raw, { yaml, console }, { name }) => {
     throw e;
   }
 };
+
+module.exports.parse = change_keys;

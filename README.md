@@ -9,7 +9,7 @@
 [![clones](https://raw.githubusercontent.com/yi-Xu-0100/traffic2badge/traffic/traffic-cfw-scripts/clones.svg)](https://github.com/yi-Xu-0100/traffic2badge/tree/traffic#-cfw-scripts)
 [![clones per week](https://raw.githubusercontent.com/yi-Xu-0100/traffic2badge/traffic/traffic-cfw-scripts/clones_per_week.svg)](https://github.com/yi-Xu-0100/traffic2badge/tree/traffic#-cfw-scripts)
 
-Some scripts for parser in [Fndroid/clash_for_windows_pkg](https://github.com/Fndroid/clash_for_windows_pkg).
+Some scripts for [parser](https://docs.cfw.lbyczf.com/contents/parser.html) in [Fndroid/clash_for_windows_pkg](https://github.com/Fndroid/clash_for_windows_pkg).
 
 **Only for studying and testing usage, and delete code yourself with the usage completed. Thanks!** 😜
 
@@ -17,27 +17,27 @@ Some scripts for parser in [Fndroid/clash_for_windows_pkg](https://github.com/Fn
 
 - [🎨 Table of Contents](#-table-of-contents)
 - [📝 Scripts](#-scripts)
-- [🍱 Library](#-library)
+- [🍱 Libraries](#-libraries)
 - [🔊 CHANGELOG](#-changelog)
 - [📄 LICENSE](#-license)
 - [🎉 Thanks](#-thanks)
 
 ## 📝 Scripts
 
-|                         name                         |     description     | variable |
-| :--------------------------------------------------: | :-----------------: | :------: |
-| [subs-info-parser.js](./scripts/subs-info-parser.js) |  get traffic data   |          |
-|    [auto-check-in.js](./scripts/auto-check-in.js)    |    auto check in    |          |
-|     [change-rules.js](./scripts/change-rules.js)     |  add personal rule  |          |
-|      [change-keys.js](./scripts/change-keys.js)      | fit new version key |          |
+|                         name                         |         description          | variable |
+| :--------------------------------------------------: | :--------------------------: | :------: |
+| [subs-info-parser.js](./scripts/subs-info-parser.js) | get subscription information |          |
+|    [auto-check-in.js](./scripts/auto-check-in.js)    |        auto check in         |          |
+|     [change-rules.js](./scripts/change-rules.js)     |      add personal rule       |          |
+|      [change-keys.js](./scripts/change-keys.js)      |     fit new version key      |          |
 
-## 🍱 Library
+## 🍱 Libraries
 
 |                  name                  |    description     |       dependencies       |
 | :------------------------------------: | :----------------: | :----------------------: |
 | [notify.js](./lib/subs-info-parser.js) | notify for windows | [mikaelbr/node-notifier] |
 
-[node-notifier]: https://github.com/mikaelbr/node-notifier
+[mikaelbr/node-notifier]: https://github.com/mikaelbr/node-notifier
 
 ## 🔊 CHANGELOG
 

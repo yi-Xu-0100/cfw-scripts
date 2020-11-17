@@ -1,6 +1,15 @@
+/**
+ * @module scripts
+ */
+
 const { notify } = require('../lib/notify');
 
-module.exports.parse = (raw, { yaml, console }, { name }) => {
+/**
+ * @function change_rules
+ * @description The script used to change rules.
+ */
+
+let change_rules = (raw, { yaml, console }, { name }) => {
   try {
     var rawObj = yaml.parse(raw);
     rawObj['rules'].unshift('DOMAIN-SUFFIX,manhuabudang.com,DIRECT');
@@ -19,3 +28,5 @@ module.exports.parse = (raw, { yaml, console }, { name }) => {
     throw e;
   }
 };
+
+module.exports.parse = change_rules;
