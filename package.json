@@ -1,6 +1,6 @@
 {
   "name": "cfw-scripts",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Some scripts for parser in [clash.for.windows](https://github.com/Fndroid/clash_for_windows_pkg).",
   "main": "main.js",
   "scripts": {
@@ -30,10 +30,11 @@
     "url": "git+https://github.com/yi-Xu-0100/cfw-scripts.git"
   },
   "keywords": [
-    "node",
+    "nodejs",
     "CFW",
     "parser",
-    "scripts"
+    "scripts",
+    "Javascript"
   ],
   "author": "yi_Xu",
   "license": "MIT",
