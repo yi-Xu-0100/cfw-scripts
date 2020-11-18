@@ -2,6 +2,7 @@
 
 [![sync2gitee(list)](<https://github.com/yi-Xu-0100/hub-mirror/workflows/sync2gitee(list)/badge.svg>)](https://github.com/yi-Xu-0100/hub-mirror)
 [![Github last commit](https://img.shields.io/github/last-commit/yi-Xu-0100/cfw-scripts)](https://github.com/yi-Xu-0100/cfw-scripts)
+[![Github latest release](https://img.shields.io/github/v/release/yi-Xu-0100/cfw-scripts)](https://github.com/yi-Xu-0100/cfw-scripts/releases)
 [![Github license](https://img.shields.io/github/license/yi-Xu-0100/cfw-scripts)](./LICENSE)
 
 [![views](https://raw.githubusercontent.com/yi-Xu-0100/traffic2badge/traffic/traffic-cfw-scripts/views.svg)](https://github.com/yi-Xu-0100/traffic2badge/tree/traffic#-cfw-scripts)
