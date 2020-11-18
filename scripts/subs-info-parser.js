@@ -4,10 +4,10 @@
  */
 
 const { notify } = require('../lib/notify');
-const fs = require('fs');
-const path = require('path');
-const variable_path = path.resolve(__dirname, './variables.json');
-let variables = JSON.parse(fs.readFileSync(variable_path, 'utf-8'))['subs-info-parser'];
+const { readFileSync } = require('fs');
+const { resolve } = require('path');
+const variable_path = resolve(__dirname, './variables.json');
+let variables = JSON.parse(readFileSync(variable_path, 'utf-8'))['subs-info-parser'];
 let urls = variables.urls;
 let names = variables.names;
 
@@ -32,7 +32,8 @@ let subs_info_parser = async (raw, { axios, console }, { name }) => {
       if (!/upload=(\d+)?; download=(\d+)?; total=(\d+)?; expire=(\d+)?/.test(info)) {
         console.log(`[info]: urls: ${urls[i]}`);
         console.log(`[warning]: No found subscription-userinfo in ${names[i]}`);
-        break;
+        console.log(`[info]: fetch subscription-userinfo of ${names[i]} completely`);
+        continue;
       }
       let upload = traffic(RegExp.$1 * 1);
       console.log(`[info]: ${names[i]} upload: ${RegExp.$1} = ${upload}`);
@@ -49,6 +50,7 @@ let subs_info_parser = async (raw, { axios, console }, { name }) => {
         `traffic : ${used} | ${total}\nexpire: ${expire}`,
         false
       );
+      console.log(`[info]: fetch subscription-userinfo of ${names[i]} completely`);
     }
     return raw;
   } catch (e) {
