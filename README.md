@@ -44,7 +44,7 @@ Some scripts for [parser](https://docs.cfw.lbyczf.com/contents/parser.html) in [
 
 ## 🔊 CHANGELOG
 
-- [CHANGELOG](./CHANGELOG.md)
+- [CHANGELOG](https://github.com/yi-Xu-0100/cfw-scripts/blob/main/CHANGELOG.md)
 
 ## 📄 LICENSE
 
