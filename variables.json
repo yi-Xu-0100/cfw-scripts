@@ -4,5 +4,8 @@
     "keep": [],
     "email": [],
     "pwd": []
+  },
+  "subs-info-parser": {
+    "urls": []
   }
 }
