@@ -24,12 +24,14 @@ Some scripts for [parser](https://docs.cfw.lbyczf.com/contents/parser.html) in [
 
 ## 📝 Scripts
 
-|                         name                         |         description          | variable |
-| :--------------------------------------------------: | :--------------------------: | :------: |
-| [subs-info-parser.js](./scripts/subs-info-parser.js) | get subscription information |          |
-|    [auto-check-in.js](./scripts/auto-check-in.js)    |        auto check in         |          |
-|     [change-rules.js](./scripts/change-rules.js)     |      add personal rule       |          |
-|      [change-keys.js](./scripts/change-keys.js)      |     fit new version key      |          |
+|                         name                         |         description          |    variables     |
+| :--------------------------------------------------: | :--------------------------: | :--------------: |
+| [subs-info-parser.js](./scripts/subs-info-parser.js) | get subscription information | subs-info-parser |
+|    [auto-check-in.js](./scripts/auto-check-in.js)    |        auto check in         |  auto-check-in   |
+|     [change-rules.js](./scripts/change-rules.js)     |      add personal rule       |                  |
+|      [change-keys.js](./scripts/change-keys.js)      |     fit new version key      |                  |
+
+**Set variables in `./scripts/variables.json`.**
 
 ## 🍱 Libraries
 
