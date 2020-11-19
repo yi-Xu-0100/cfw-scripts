@@ -7,7 +7,7 @@ async function run() {
     if (existsSync('./scripts/variables.json')) throw Error('occupied error');
     else {
       copyFileSync('./variables.json', './scripts/variables.json');
-      console.log('[info]: Start mv ./variables.json to ./scripts/variables.json');
+      console.log('[info]: Start copy ./variables.json to ./scripts/variables.json');
     }
   } catch (e) {
     if (e.message === 'occupied error') {
