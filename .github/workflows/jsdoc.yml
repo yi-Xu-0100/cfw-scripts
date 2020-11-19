@@ -26,7 +26,7 @@ jobs:
         run: |
           cp ./LICENSE ./docs/
           cp ./README.md ./docs/
-          cp -r ./resources/ ./lib/
+          cp -r ./resources/ ./docs/
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
