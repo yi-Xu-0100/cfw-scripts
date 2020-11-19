@@ -1,6 +1,6 @@
 /**
  * @module change_keys
- * @description The script used to change keys for fitting [breaking changes] in clash v1.0.0.
+ * @description The script was used to change keys for fitting [breaking changes] in clash v1.0.0.
  * [breaking changes]: https://github.com/Dreamacro/clash/wiki/breaking-changes-in-1.0.0
  */
 

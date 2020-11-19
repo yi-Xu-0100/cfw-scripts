@@ -10,7 +10,7 @@
 [![clones](https://raw.githubusercontent.com/yi-Xu-0100/traffic2badge/traffic/traffic-cfw-scripts/clones.svg)](https://github.com/yi-Xu-0100/traffic2badge/tree/traffic#-cfw-scripts)
 [![clones per week](https://raw.githubusercontent.com/yi-Xu-0100/traffic2badge/traffic/traffic-cfw-scripts/clones_per_week.svg)](https://github.com/yi-Xu-0100/traffic2badge/tree/traffic#-cfw-scripts)
 
-Some scripts for [parser](https://docs.cfw.lbyczf.com/contents/parser.html) in [Fndroid/clash_for_windows_pkg](https://github.com/Fndroid/clash_for_windows_pkg).
+Some scripts for [`parser`](https://docs.cfw.lbyczf.com/contents/parser.html) in [`Fndroid/clash_for_windows_pkg`](https://github.com/Fndroid/clash_for_windows_pkg).
 
 **Only for studying and testing usage, and delete code yourself with the usage completed. Thanks!** 😜
 
@@ -33,7 +33,7 @@ Some scripts for [parser](https://docs.cfw.lbyczf.com/contents/parser.html) in [
 
 ### 📝 setup repository with git and npm
 
-The scripts used [mikaelbr/node-notifier](https://github.com/mikaelbr/node-notifier) for fitting windows notification persist in action center.
+The scripts used [`mikaelbr/node-notifier`](https://github.com/mikaelbr/node-notifier) for fitting windows notification persist in action center.
 
 ```bash
 git clone https://github.com/yi-Xu-0100/cfw-scripts.git
@@ -44,6 +44,8 @@ npm run start
 The notify will be test and copy `./lib/variables.json` to `./scripts/variables.json`. **You can set variables in `./scripts/variables.json`, and the file will include in `.gitignore`.**
 
 ### 📝 Setup parser for `auto-check-in.js`
+
+**The script was used to automatic check in.**
 
 Set the example subscription link for using the `auto-check-in.js`, and set the update interval in 1 hour(optional).
 
@@ -59,6 +61,8 @@ parsers:
 
 ### 📝 Setup parser for `subs-info-parser.js`
 
+**The script was used to get subscription information of domains.**
+
 Set the example subscription link for using the `subs-info-parser.js`, and set the update interval in 6 hour(optional).
 
 ![subscription example](./resources/subscription-info.png)
@@ -73,6 +77,8 @@ parsers:
 
 ### 📝 Setup parser for `change-keys.js`
 
+**The script was used to change keys for fitting [breaking changes](https://github.com/Dreamacro/clash/wiki/breaking-changes-in-1.0.0) in clash v1.0.0.**
+
 You can set the parsers with `reg` to fit the all link with string `www.example.com`.
 
 ```yaml
@@ -83,9 +89,9 @@ parsers:
 
 ### 📝 Setup parser for `change-rules.js`
 
-You can set the parsers with `reg` to fit the all link with string `www.example.com`.
+**The script will use [`rule-providers`](https://lancellc.gitbook.io/clash/clash-config-file/rule-provider) with [`Loyalsoldier/clash-rules`](https://github.com/Loyalsoldier/clash-rules).**
 
-**The rules will use [`rule-providers`](https://lancellc.gitbook.io/clash/clash-config-file/rule-provider) with [Loyalsoldier/clash-rules](https://github.com/Loyalsoldier/clash-rules).**
+You can set the parsers with `reg` to fit the all link with string `www.example.com`.
 
 ```yaml
 parsers:

@@ -1,6 +1,6 @@
 /**
  * @module subs_info_parser
- * @description The script used to get subscription information of user.
+ * @description The script was used to get subscription information of domains.
  */
 
 const { notify } = require('../lib/notify');

@@ -1,6 +1,6 @@
 /**
  * @module auto_check_in
- * @description The script used to automatic check in.
+ * @description The script was used to automatic check in.
  * @param {string[]} [domains = []] - The site of domain will be check in.
  * @param {string[]} [keep = []] - Value of keep.
  * @param {string[]} [email = []] - Value of email.

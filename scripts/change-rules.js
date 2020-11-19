@@ -1,6 +1,8 @@
 /**
  * @module change_rules
- * @description The script used to change rules.
+ * @description The script will use [`rule-providers`] with [Loyalsoldier/clash-rules].
+ * [`rule-providers`]: https://lancellc.gitbook.io/clash/clash-config-file/rule-provider
+ * [Loyalsoldier/clash-rules]: https://github.com/Loyalsoldier/clash-rules
  */
 
 const { notify } = require('../lib/notify');
