@@ -67,6 +67,8 @@
 <li><a href="#-setup-repository-with-git-and-npm">📝 setup repository with git and npm</a></li>
 <li><a href="#-setup-parser-for-auto-check-injs">📝 Setup parser for <code>auto-check-in.js</code></a></li>
 <li><a href="#-setup-parser-for-subs-info-parserjs">📝 Setup parser for <code>subs-info-parser.js</code></a></li>
+<li><a href="#-setup-parser-for-change-keysjs">📝 Setup parser for <code>change-keys.js</code></a></li>
+<li><a href="#-setup-parser-for-change-rulesjs">📝 Setup parser for <code>change-rules.js</code></a></li>
 </ul>
 </li>
 <li><a href="#-scripts">📝 Scripts</a></li>
@@ -82,7 +84,7 @@
 npm ci
 npm run start
 </code></pre>
-<p>The notify will be test and copy <code>./variables.json</code> to <code>./scripts/variables.json</code>. <strong>You can set variables in <code>./scripts/variables.json</code>, and the file will include in <code>.gitignore</code>.</strong></p>
+<p>The notify will be test and copy <code>./lib/variables.json</code> to <code>./scripts/variables.json</code>. <strong>You can set variables in <code>./scripts/variables.json</code>, and the file will include in <code>.gitignore</code>.</strong></p>
 <h3>📝 Setup parser for <code>auto-check-in.js</code></h3>
 <p>Set the example subscription link for using the <code>auto-check-in.js</code>, and set the update interval in 1 hour(optional).</p>
 <p><img src="./resources/checkin.png" alt="checkin subscription example"></p>
@@ -92,12 +94,25 @@ npm run start
     file: 'D:/Applications/cfw-scripts/scripts/auto-check-in.js' #set the path of `auto-check-in.js`.
 </code></pre>
 <h3>📝 Setup parser for <code>subs-info-parser.js</code></h3>
-<p>Set the example subscription link for using the <code>subs-info-parser.js</code>, and set the update interval in 1 hour(optional).</p>
+<p>Set the example subscription link for using the <code>subs-info-parser.js</code>, and set the update interval in 6 hour(optional).</p>
 <p><img src="./resources/subscription-info.png" alt="subscription example"></p>
 <p>You can set the parsers with <code>reg</code> to fit the example link.</p>
 <pre class="prettyprint source lang-yaml"><code>parsers:
   - reg: .*example.*q=subscription$
     file: 'D:/Applications/cfw-scripts/scripts/subs-info-parser.js' #set the path of `subs-info-parser.js`.
+</code></pre>
+<h3>📝 Setup parser for <code>change-keys.js</code></h3>
+<p>You can set the parsers with <code>reg</code> to fit the all link with string <code>www.example.com</code>.</p>
+<pre class="prettyprint source lang-yaml"><code>parsers:
+  - reg: ^((?!www\.example\.com).)*$
+    file: 'D:/Applications/cfw-scripts/scripts/change-keys.js' #set the path of `change-keys.js`.
+</code></pre>
+<h3>📝 Setup parser for <code>change-rules.js</code></h3>
+<p>You can set the parsers with <code>reg</code> to fit the all link with string <code>www.example.com</code>.</p>
+<p><strong>The rules will use <a href="https://lancellc.gitbook.io/clash/clash-config-file/rule-provider"><code>rule-providers</code></a> with <a href="https://github.com/Loyalsoldier/clash-rules">Loyalsoldier/clash-rules</a>.</strong></p>
+<pre class="prettyprint source lang-yaml"><code>parsers:
+  - reg: ^((?!www\.example\.com).)*$
+    file: 'D:/Applications/cfw-scripts/scripts/change-rules.js' #set the path of `change-rules.js`.
 </code></pre>
 <h2>📝 Scripts</h2>
 <table>
@@ -110,23 +125,23 @@ npm run start
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><a href="./scripts/subs-info-parser.js">subs-info-parser.js</a></td>
+<td style="text-align:center"><a href="https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/subs-info-parser.js">subs-info-parser.js</a></td>
 <td style="text-align:center">get subscription information</td>
 <td style="text-align:center">subs-info-parser</td>
 </tr>
 <tr>
-<td style="text-align:center"><a href="./scripts/auto-check-in.js">auto-check-in.js</a></td>
+<td style="text-align:center"><a href="https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/auto-check-in.js">auto-check-in.js</a></td>
 <td style="text-align:center">auto check in</td>
 <td style="text-align:center">auto-check-in</td>
 </tr>
 <tr>
-<td style="text-align:center"><a href="./scripts/change-rules.js">change-rules.js</a></td>
-<td style="text-align:center">add personal rule</td>
+<td style="text-align:center"><a href="https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/change-keys.js">change-keys.js</a></td>
+<td style="text-align:center">fit new version key</td>
 <td style="text-align:center"></td>
 </tr>
 <tr>
-<td style="text-align:center"><a href="./scripts/change-keys.js">change-keys.js</a></td>
-<td style="text-align:center">fit new version key</td>
+<td style="text-align:center"><a href="https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/change-rules.js">change-rules.js</a></td>
+<td style="text-align:center">add personal rule</td>
 <td style="text-align:center"></td>
 </tr>
 </tbody>
@@ -142,9 +157,19 @@ npm run start
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><a href="./lib/subs-info-parser.js">notify.js</a></td>
+<td style="text-align:center"><a href="https://github.com/yi-Xu-0100/cfw-scripts/tree/main/lib/variables.json">variables.json</a></td>
+<td style="text-align:center">variables for scripts</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://github.com/yi-Xu-0100/cfw-scripts/tree/main/lib/notify.js">notify.js</a></td>
 <td style="text-align:center">notify for windows</td>
 <td style="text-align:center"><a href="https://github.com/mikaelbr/node-notifier">mikaelbr/node-notifier</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://github.com/yi-Xu-0100/cfw-scripts/tree/main/lib/rule-providers.json">rule-providers.json</a></td>
+<td style="text-align:center">template for rule-providers</td>
+<td style="text-align:center"><a href="https://github.com/Loyalsoldier/clash-rules">Loyalsoldier/clash-rules</a></td>
 </tr>
 </tbody>
 </table>
@@ -159,6 +184,7 @@ npm run start
 <h2>🎉 Thanks</h2>
 <ul>
 <li><a href="https://github.com/Fndroid/clash_for_windows_pkg">Fndroid/clash_for_windows_pkg</a></li>
+<li><a href="https://github.com/Loyalsoldier/clash-rules">Loyalsoldier/clash-rules</a></li>
 </ul></article>
     </section>
 
@@ -172,7 +198,7 @@ npm run start
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Thu Nov 19 2020 03:15:17 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Thu Nov 19 2020 11:07:03 GMT+0000 (Coordinated Universal Time) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>

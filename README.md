@@ -21,6 +21,8 @@ Some scripts for [parser](https://docs.cfw.lbyczf.com/contents/parser.html) in [
   - [📝 setup repository with git and npm](#-setup-repository-with-git-and-npm)
   - [📝 Setup parser for `auto-check-in.js`](#-setup-parser-for-auto-check-injs)
   - [📝 Setup parser for `subs-info-parser.js`](#-setup-parser-for-subs-info-parserjs)
+  - [📝 Setup parser for `change-keys.js`](#-setup-parser-for-change-keysjs)
+  - [📝 Setup parser for `change-rules.js`](#-setup-parser-for-change-rulesjs)
 - [📝 Scripts](#-scripts)
 - [🍱 Libraries](#-libraries)
 - [🔊 CHANGELOG](#-changelog)
@@ -39,7 +41,7 @@ npm ci
 npm run start
 ```
 
-The notify will be test and copy `./variables.json` to `./scripts/variables.json`. **You can set variables in `./scripts/variables.json`, and the file will include in `.gitignore`.**
+The notify will be test and copy `./lib/variables.json` to `./scripts/variables.json`. **You can set variables in `./scripts/variables.json`, and the file will include in `.gitignore`.**
 
 ### 📝 Setup parser for `auto-check-in.js`
 
@@ -57,7 +59,7 @@ parsers:
 
 ### 📝 Setup parser for `subs-info-parser.js`
 
-Set the example subscription link for using the `subs-info-parser.js`, and set the update interval in 1 hour(optional).
+Set the example subscription link for using the `subs-info-parser.js`, and set the update interval in 6 hour(optional).
 
 ![subscription example](./resources/subscription-info.png)
 
@@ -69,22 +71,55 @@ parsers:
     file: 'D:/Applications/cfw-scripts/scripts/subs-info-parser.js' #set the path of `subs-info-parser.js`.
 ```
 
+### 📝 Setup parser for `change-keys.js`
+
+You can set the parsers with `reg` to fit the all link with string `www.example.com`.
+
+```yaml
+parsers:
+  - reg: ^((?!www\.example\.com).)*$
+    file: 'D:/Applications/cfw-scripts/scripts/change-keys.js' #set the path of `change-keys.js`.
+```
+
+### 📝 Setup parser for `change-rules.js`
+
+You can set the parsers with `reg` to fit the all link with string `www.example.com`.
+
+**The rules will use [`rule-providers`](https://lancellc.gitbook.io/clash/clash-config-file/rule-provider) with [Loyalsoldier/clash-rules](https://github.com/Loyalsoldier/clash-rules).**
+
+```yaml
+parsers:
+  - reg: ^((?!www\.example\.com).)*$
+    file: 'D:/Applications/cfw-scripts/scripts/change-rules.js' #set the path of `change-rules.js`.
+```
+
 ## 📝 Scripts
 
-|                         name                         |         description          |    variables     |
-| :--------------------------------------------------: | :--------------------------: | :--------------: |
-| [subs-info-parser.js](./scripts/subs-info-parser.js) | get subscription information | subs-info-parser |
-|    [auto-check-in.js](./scripts/auto-check-in.js)    |        auto check in         |  auto-check-in   |
-|     [change-rules.js](./scripts/change-rules.js)     |      add personal rule       |                  |
-|      [change-keys.js](./scripts/change-keys.js)      |     fit new version key      |                  |
+|         name          |         description          |    variables     |
+| :-------------------: | :--------------------------: | :--------------: |
+| [subs-info-parser.js] | get subscription information | subs-info-parser |
+|  [auto-check-in.js]   |        auto check in         |  auto-check-in   |
+|   [change-keys.js]    |     fit new version key      |                  |
+|   [change-rules.js]   |      add personal rule       |                  |
+
+[subs-info-parser.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/subs-info-parser.js
+[auto-check-in.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/auto-check-in.js
+[change-keys.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/change-keys.js
+[change-rules.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/change-rules.js
 
 ## 🍱 Libraries
 
-|                  name                  |    description     |       dependencies       |
-| :------------------------------------: | :----------------: | :----------------------: |
-| [notify.js](./lib/subs-info-parser.js) | notify for windows | [mikaelbr/node-notifier] |
+|         name          |         description         |        dependencies        |
+| :-------------------: | :-------------------------: | :------------------------: |
+|   [variables.json]    |    variables for scripts    |                            |
+|      [notify.js]      |     notify for windows      |  [mikaelbr/node-notifier]  |
+| [rule-providers.json] | template for rule-providers | [Loyalsoldier/clash-rules] |
 
+[variables.json]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/lib/variables.json
+[notify.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/lib/notify.js
 [mikaelbr/node-notifier]: https://github.com/mikaelbr/node-notifier
+[rule-providers.json]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/lib/rule-providers.json
+[loyalsoldier/clash-rules]: https://github.com/Loyalsoldier/clash-rules
 
 ## 🔊 CHANGELOG
 
@@ -97,3 +132,4 @@ parsers:
 ## 🎉 Thanks
 
 - [Fndroid/clash_for_windows_pkg](https://github.com/Fndroid/clash_for_windows_pkg)
+- [Loyalsoldier/clash-rules](https://github.com/Loyalsoldier/clash-rules)
