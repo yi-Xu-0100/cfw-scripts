@@ -6,8 +6,8 @@ async function run() {
     notify('cfw-parser', 'Notify test successfully', false);
     if (existsSync('./scripts/variables.json')) throw Error('occupied error');
     else {
-      copyFileSync('./variables.json', './scripts/variables.json');
-      console.log('[info]: Start copy ./variables.json to ./scripts/variables.json');
+      copyFileSync('./lib/variables.json', './scripts/variables.json');
+      console.log('[info]: Start copy ./lib/variables.json to ./scripts/variables.json');
     }
   } catch (e) {
     if (e.message === 'occupied error') {

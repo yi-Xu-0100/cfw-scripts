@@ -1,14 +1,23 @@
 {
   "cSpell.words": [
     "Fndroid",
+    "Folx",
+    "GEOIP",
+    "Loyalsoldier",
     "andstor",
     "auto",
     "auto check in",
     "baipiaoyun",
     "check",
     "clashwin",
+    "cncidr",
+    "greatfire",
+    "haishan",
+    "icloud",
     "in",
     "injs",
+    "ipcidr",
+    "lancidr",
     "lbyczf",
     "manhuabudang",
     "miaona",
@@ -18,8 +27,23 @@
     "parserjs",
     "peaceiris",
     "phicomm",
+    "privoxy",
+    "razord",
     "renzheyun",
-    "userinfo"
+    "ruleset",
+    "s",
+    "userinfo",
+    "yacd"
   ],
-  "cSpell.ignoreWords": ["d", "d euar tbsjy x ek tl", "ek", "euar", "renzhe", "tbsjy", "tl", "x"]
+  "cSpell.ignoreWords": [
+    "d",
+    "d euar tbsjy x ek tl",
+    "ek",
+    "euar",
+    "renzhe",
+    "tbsjy",
+    "tl",
+    "unblockmusic",
+    "x"
+  ]
 }
