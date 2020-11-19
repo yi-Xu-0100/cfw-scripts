@@ -21,6 +21,8 @@ Some scripts for [parser](https://docs.cfw.lbyczf.com/contents/parser.html) in [
   - [📝 setup repository with git and npm](#-setup-repository-with-git-and-npm)
   - [📝 Setup parser for `auto-check-in.js`](#-setup-parser-for-auto-check-injs)
   - [📝 Setup parser for `subs-info-parser.js`](#-setup-parser-for-subs-info-parserjs)
+  - [📝 Setup parser for `change-keys.js`](#-setup-parser-for-change-keysjs)
+  - [📝 Setup parser for `change-rules.js`](#-setup-parser-for-change-rulesjs)
 - [📝 Scripts](#-scripts)
 - [🍱 Libraries](#-libraries)
 - [🔊 CHANGELOG](#-changelog)
@@ -69,32 +71,54 @@ parsers:
     file: 'D:/Applications/cfw-scripts/scripts/subs-info-parser.js' #set the path of `subs-info-parser.js`.
 ```
 
+### 📝 Setup parser for `change-keys.js`
+
+You can set the parsers with `reg` to fit the all link with string `www.example.com`.
+
+```yaml
+parsers:
+  - reg: ^((?!www\.example\.com).)*$
+    file: 'D:/Applications/cfw-scripts/scripts/change-keys.js' #set the path of `change-keys.js`.
+```
+
+### 📝 Setup parser for `change-rules.js`
+
+You can set the parsers with `reg` to fit the all link with string `www.example.com`.
+
+**The rules will use [`rule-providers`](https://lancellc.gitbook.io/clash/clash-config-file/rule-provider) with [Loyalsoldier/clash-rules](https://github.com/Loyalsoldier/clash-rules).**
+
+```yaml
+parsers:
+  - reg: ^((?!www\.example\.com).)*$
+    file: 'D:/Applications/cfw-scripts/scripts/change-rules.js' #set the path of `change-rules.js`.
+```
+
 ## 📝 Scripts
 
 |         name          |         description          |    variables     |
 | :-------------------: | :--------------------------: | :--------------: |
 | [subs-info-parser.js] | get subscription information | subs-info-parser |
 |  [auto-check-in.js]   |        auto check in         |  auto-check-in   |
-|   [change-rules.js]   |      add personal rule       |                  |
 |   [change-keys.js]    |     fit new version key      |                  |
+|   [change-rules.js]   |      add personal rule       |                  |
 
 [subs-info-parser.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/subs-info-parser.js
 [auto-check-in.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/auto-check-in.js
-[change-rules.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/change-rules.js
 [change-keys.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/change-keys.js
+[change-rules.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/change-rules.js
 
 ## 🍱 Libraries
 
-|         name         |        description         |        dependencies        |
-| :------------------: | :------------------------: | :------------------------: |
-|   [variables.json]   |   variables for scripts    |                            |
-|     [notify.js]      |     notify for windows     |  [mikaelbr/node-notifier]  |
-| [rule-provides.json] | template for rule-provides | [Loyalsoldier/clash-rules] |
+|         name          |         description         |        dependencies        |
+| :-------------------: | :-------------------------: | :------------------------: |
+|   [variables.json]    |    variables for scripts    |                            |
+|      [notify.js]      |     notify for windows      |  [mikaelbr/node-notifier]  |
+| [rule-providers.json] | template for rule-providers | [Loyalsoldier/clash-rules] |
 
 [variables.json]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/lib/variables.json
 [notify.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/lib/notify.js
 [mikaelbr/node-notifier]: https://github.com/mikaelbr/node-notifier
-[rule-provides.json]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/lib/rule-provides.json
+[rule-providers.json]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/lib/rule-providers.json
 [loyalsoldier/clash-rules]: https://github.com/Loyalsoldier/clash-rules
 
 ## 🔊 CHANGELOG
