@@ -18,9 +18,9 @@ Some scripts for [parser](https://docs.cfw.lbyczf.com/contents/parser.html) in [
 
 - [🎨 Table of Contents](#-table-of-contents)
 - [🚀 Usage](#-usage)
-  - [setup repository with git and npm](#setup-repository-with-git-and-npm)
-  - [Setup parser for `auto-check-in.js`](#setup-parser-for-auto-check-injs)
-  - [Setup parser for `subs-info-parser.js`](#setup-parser-for-subs-info-parserjs)
+  - [📝 setup repository with git and npm](#-setup-repository-with-git-and-npm)
+  - [📝 Setup parser for `auto-check-in.js`](#-setup-parser-for-auto-check-injs)
+  - [📝 Setup parser for `subs-info-parser.js`](#-setup-parser-for-subs-info-parserjs)
 - [📝 Scripts](#-scripts)
 - [🍱 Libraries](#-libraries)
 - [🔊 CHANGELOG](#-changelog)
@@ -29,7 +29,7 @@ Some scripts for [parser](https://docs.cfw.lbyczf.com/contents/parser.html) in [
 
 ## 🚀 Usage
 
-### setup repository with git and npm
+### 📝 setup repository with git and npm
 
 The scripts used [mikaelbr/node-notifier](https://github.com/mikaelbr/node-notifier) for fitting windows notification persist in action center.
 
@@ -41,7 +41,7 @@ npm run start
 
 The notify will be test and copy `./variables.json` to `./scripts/variables.json`. **You can set variables in `./scripts/variables.json`, and the file will include in `.gitignore`.**
 
-### Setup parser for `auto-check-in.js`
+### 📝 Setup parser for `auto-check-in.js`
 
 Set the example subscription link for using the `auto-check-in.js`, and set the update interval in 1 hour(optional).
 
@@ -55,7 +55,7 @@ parsers:
     file: 'D:/Applications/cfw-scripts/scripts/auto-check-in.js' #set the path of `auto-check-in.js`.
 ```
 
-### Setup parser for `subs-info-parser.js`
+### 📝 Setup parser for `subs-info-parser.js`
 
 Set the example subscription link for using the `subs-info-parser.js`, and set the update interval in 1 hour(optional).
 
@@ -66,7 +66,7 @@ You can set the parsers with `reg` to fit the example link.
 ```yaml
 parsers:
   - reg: .*example.*q=subscription$
-    file: 'D:/Applications/cfw-scripts/scripts/auto-check-in.js' #set the path of `subs-info-parser.js`.
+    file: 'D:/Applications/cfw-scripts/scripts/subs-info-parser.js' #set the path of `subs-info-parser.js`.
 ```
 
 ## 📝 Scripts
