@@ -24,7 +24,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-auto_check_in.html">auto_check_in</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-change_keys.html">change_keys</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-change_rules.html">change_rules</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-subs_info_parser.html">subs_info_parser</a></span></li>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-auto_check_in.html">auto_check_in</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-change_keys.html">change_keys</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-change_rules.html">change_rules</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-merge_nodes.html">merge_nodes</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-subs_info_parser.html">subs_info_parser</a></span></li>
 </nav>
 
 <div id="main">
@@ -69,6 +69,7 @@
 <li><a href="#-setup-parser-for-subs-info-parserjs">📝 Setup parser for <code>subs-info-parser.js</code></a></li>
 <li><a href="#-setup-parser-for-change-keysjs">📝 Setup parser for <code>change-keys.js</code></a></li>
 <li><a href="#-setup-parser-for-change-rulesjs">📝 Setup parser for <code>change-rules.js</code></a></li>
+<li><a href="#-setup-parser-for-merge-nodesjs">📝 Setup parser for <code>merge-nodes.js</code></a></li>
 </ul>
 </li>
 <li><a href="#-scripts">📝 Scripts</a></li>
@@ -86,36 +87,43 @@ npm run start
 </code></pre>
 <p>The notify will be test and copy <code>./lib/variables.json</code> to <code>./scripts/variables.json</code>. <strong>You can set variables in <code>./scripts/variables.json</code>, and the file will include in <code>.gitignore</code>.</strong></p>
 <h3>📝 Setup parser for <code>auto-check-in.js</code></h3>
-<p><strong>The script was used to automatic check in.</strong></p>
+<p><strong>The script was used to automatic check in. The variables need to be set in <code>./scripts/variables.json</code>.</strong></p>
 <p>Set the example subscription link for using the <code>auto-check-in.js</code>, and set the update interval in 1 hour(optional).</p>
 <p><img src="./resources/checkin.png" alt="checkin subscription example"></p>
-<p>You can set the parsers with <code>reg</code> to fit the example link.</p>
+<p>You can set the parsers with <code>reg</code> to fit the example link with <code>q=checkin</code>.</p>
 <pre class="prettyprint source lang-yaml"><code>parsers:
   - reg: .*example.*q=checkin$
     file: 'D:/Applications/cfw-scripts/scripts/auto-check-in.js' #set the path of `auto-check-in.js`.
 </code></pre>
 <h3>📝 Setup parser for <code>subs-info-parser.js</code></h3>
-<p><strong>The script was used to get subscription information of domains.</strong></p>
+<p><strong>The script was used to get subscription information of domains. The variables need to be set in <code>./scripts/variables.json</code>.</strong></p>
 <p>Set the example subscription link for using the <code>subs-info-parser.js</code>, and set the update interval in 6 hour(optional).</p>
 <p><img src="./resources/subscription-info.png" alt="subscription example"></p>
-<p>You can set the parsers with <code>reg</code> to fit the example link.</p>
+<p>You can set the parsers with <code>reg</code> to fit the example link with <code>q=subscription</code>.</p>
 <pre class="prettyprint source lang-yaml"><code>parsers:
   - reg: .*example.*q=subscription$
     file: 'D:/Applications/cfw-scripts/scripts/subs-info-parser.js' #set the path of `subs-info-parser.js`.
 </code></pre>
 <h3>📝 Setup parser for <code>change-keys.js</code></h3>
 <p><strong>The script was used to change keys for fitting <a href="https://github.com/Dreamacro/clash/wiki/breaking-changes-in-1.0.0">breaking changes</a> in clash v1.0.0.</strong></p>
-<p>You can set the parsers with <code>reg</code> to fit the all link with string <code>www.example.com</code>.</p>
+<p>You can set the parsers with <code>reg</code> to fit the all link without string <code>www.example.com</code>.</p>
 <pre class="prettyprint source lang-yaml"><code>parsers:
   - reg: ^((?!www\.example\.com).)*$
     file: 'D:/Applications/cfw-scripts/scripts/change-keys.js' #set the path of `change-keys.js`.
 </code></pre>
 <h3>📝 Setup parser for <code>change-rules.js</code></h3>
 <p><strong>The script will use <a href="https://lancellc.gitbook.io/clash/clash-config-file/rule-provider"><code>rule-providers</code></a> with <a href="https://github.com/Loyalsoldier/clash-rules"><code>Loyalsoldier/clash-rules</code></a>.</strong></p>
-<p>You can set the parsers with <code>reg</code> to fit the all link with string <code>www.example.com</code>.</p>
+<p>You can set the parsers with <code>reg</code> to fit the all link without string <code>www.example.com</code>.</p>
 <pre class="prettyprint source lang-yaml"><code>parsers:
   - reg: ^((?!www\.example\.com).)*$
     file: 'D:/Applications/cfw-scripts/scripts/change-rules.js' #set the path of `change-rules.js`.
+</code></pre>
+<h3>📝 Setup parser for <code>merge-nodes.js</code></h3>
+<p><strong>The script should use behind <code>change-rules.js</code>. The variables need to be set in <code>./scripts/variables.json</code>.</strong></p>
+<p>You can set the parsers with <code>reg</code> to fit the all link without string <code>www.example.com</code>.</p>
+<pre class="prettyprint source lang-yaml"><code>parsers:
+  - reg: ^((?!www\.example\.com).)*$
+    file: 'D:/Applications/cfw-scripts/scripts/merge-nodes.js' #set the path of `merge-nodes.js`.
 </code></pre>
 <h2>📝 Scripts</h2>
 <table>
@@ -146,6 +154,11 @@ npm run start
 <td style="text-align:center"><a href="https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/change-rules.js">change-rules.js</a></td>
 <td style="text-align:center">add personal rule</td>
 <td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/merge-nodes.js">merge-nodes.js</a></td>
+<td style="text-align:center">merge nodes</td>
+<td style="text-align:center">merge-nodes</td>
 </tr>
 </tbody>
 </table>
@@ -201,7 +214,7 @@ npm run start
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Thu Nov 19 2020 11:44:55 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Fri Nov 20 2020 05:37:17 GMT+0000 (Coordinated Universal Time) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>

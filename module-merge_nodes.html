@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>change_rules - Documentation</title>
+    <title>merge_nodes - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">change_rules</h1>
+    <h1 class="page-title">merge_nodes</h1>
     
 
     
@@ -51,9 +51,8 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>The script will use [<code>rule-providers</code>] with [Loyalsoldier/clash-rules].
-[<code>rule-providers</code>]: https://lancellc.gitbook.io/clash/clash-config-file/rule-provider
-[Loyalsoldier/clash-rules]: https://github.com/Loyalsoldier/clash-rules</p></div>
+            <div class="description"><p>The script was used to merge nodes with keys.
+The script will based on <code>change-rules.js</code>.</p></div>
         
 
         
@@ -95,7 +94,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="change-rules.js.html">change-rules.js</a>, <a href="change-rules.js.html#line1">line 1</a>
+        <a href="merge-nodes.js.html">merge-nodes.js</a>, <a href="merge-nodes.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -112,6 +111,78 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>keys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Array.&lt;string></code></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    []
+                
+                </td>
+            
+
+            <td class="description last">
+                <p>The proxy name include keys will be merged.</p>
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
