@@ -1,17 +1,15 @@
 /**
- * @module subs_info_parser
- * @description The script was used to get subscription information of domains.
+ * @module subs_info_domains
+ * @description The script used to make nodes of subscription information with domains.
  */
 
-const { notify } = require('../lib/notify');
-const { readFileSync } = require('fs');
-const { resolve } = require('path');
-const variable_path = resolve(__dirname, './variables.json');
-let variables = JSON.parse(readFileSync(variable_path, 'utf-8'))['subs-info-parser'];
-let urls = variables.urls;
-let names = variables.names;
+var { readFileSync, existsSync } = require('fs');
+var { resolve } = require('path');
+var variable_path = resolve(__dirname, './variables.yml');
+var modules_path = resolve(__dirname, '../node_modules');
+let debug = false;
 
-const traffic = num => {
+let traffic = num => {
   const s = ['B', 'KB', 'MB', 'GB', 'TB'];
   let idx = 0;
   while (~~(num / 1024) && idx < s.length) {
@@ -21,36 +19,121 @@ const traffic = num => {
   return `${idx === 0 ? num : num.toFixed(2)} ${s[idx]}`;
 };
 
-let subs_info_parser = async (raw, { axios, console }, { name }) => {
+let subs_info_parse = async (raw, { yaml, axios, console, notify }, { variable }) => {
   try {
     console.log(`[info]: start fetch subscription-userinfo at ${new Date()}`);
-    if (urls.length === 0) throw Error('urls is not defined');
-    if (urls.length != names.length) throw Error('variable need fully defining');
-    for (let i = 0; i < urls.length; i++) {
-      const { headers: { 'subscription-userinfo': info } = {} } = await axios.head(urls[i]);
-      console.log(`[info]: ${names[i]} subscription-userinfo: ${info}`);
-      if (!/upload=(\d+)?; download=(\d+)?; total=(\d+)?; expire=(\d+)?/.test(info)) {
-        console.log(`[info]: urls: ${urls[i]}`);
-        console.log(`[warning]: No found subscription-userinfo in ${names[i]}`);
-        console.log(`[info]: fetch subscription-userinfo of ${names[i]} completely`);
-        continue;
+    const { headers: { 'subscription-userinfo': info } = {} } = await axios.head(variable['url']);
+    console.log(`[info]: ${variable['name']} subscription-userinfo: ${info}`);
+    if (!/upload=(\d+)?; download=(\d+)?; total=(\d+)?; expire=(\d+)?/.test(info)) {
+      if (debug) console.log(`[debug]: variable['url']: ${variable['url']}`);
+      console.log(`[warning]: No found subscription-userinfo in ${variable['name']}`);
+      console.log(`[info]: fetch subscription-userinfo of ${variable['name']} completely`);
+      return raw;
+    }
+    let upload = traffic(RegExp.$1 * 1);
+    console.log(`[info]: ${variable['name']} upload: ${RegExp.$1} = ${upload}`);
+    let download = traffic(RegExp.$2 * 1);
+    console.log(`[info]: ${variable['name']} download: ${RegExp.$2} = ${download}`);
+    let total = traffic(RegExp.$3 * 1);
+    console.log(`[info]: ${variable['name']} total: ${RegExp.$3} = ${total}`);
+    let expire = new Date(RegExp.$4 * 1000).toLocaleString();
+    console.log(`[info]: ${variable['name']} expire: ${RegExp.$4} = ${expire}`);
+    let used = traffic(RegExp.$1 * 1 + RegExp.$2 * 1);
+    console.log(`[info]: ${variable['name']} used: ${RegExp.$1 * 1 + RegExp.$1 * 1} = ${used}`);
+    let reserve = traffic(RegExp.$3 * 1 - RegExp.$1 * 1 - RegExp.$2 * 1);
+    console.log(
+      `[info]: ${variable['name']} used: ${
+        RegExp.$3 * 1 - RegExp.$1 * 1 - RegExp.$1 * 1
+      } = ${reserve}`
+    );
+    var rawObj = yaml.parse(raw);
+    rawObj['proxies'].push(
+      {
+        name: `[${variable['name']}]剩余流量：${reserve}`,
+        server: 'server',
+        type: 'socks5',
+        port: 443
+      },
+      {
+        name: `[${variable['name']}]到期时间：${expire}`,
+        server: 'server',
+        type: 'socks5',
+        port: 443
       }
-      let upload = traffic(RegExp.$1 * 1);
-      console.log(`[info]: ${names[i]} upload: ${RegExp.$1} = ${upload}`);
-      let download = traffic(RegExp.$2 * 1);
-      console.log(`[info]: ${names[i]} download: ${RegExp.$2} = ${download}`);
-      let total = traffic(RegExp.$3 * 1);
-      console.log(`[info]: ${names[i]} total: ${RegExp.$3} = ${total}`);
-      let expire = new Date(RegExp.$4 * 1000).toLocaleString();
-      console.log(`[info]: ${names[i]} expire: ${RegExp.$4} = ${expire}`);
-      let used = traffic(RegExp.$1 * 1 + RegExp.$2 * 1);
-      console.log(`[info]: ${names[i]} used: ${RegExp.$1 * 1 + RegExp.$1 * 1} = ${used}`);
-      notify(
-        `${names[i]} subscription-userinfo`,
-        `traffic : ${used} | ${total}\nexpire: ${expire}`,
-        false
+    );
+    if (
+      rawObj['proxy-groups'].length === 0 ||
+      rawObj['proxy-groups'][rawObj['proxy-groups'].length - 1]['name'] != 'SUBS-INFO'
+    ) {
+      rawObj['proxy-groups'].push({
+        name: 'SUBS-INFO',
+        type: 'select',
+        proxies: []
+      });
+    }
+    rawObj['proxy-groups'][rawObj['proxy-groups'].length - 1]['proxies'].push(
+      `[${variable['name']}]剩余流量：${reserve}`,
+      `[${variable['name']}]到期时间：${expire}`
+    );
+    console.log(`[info]: fetch subscription-userinfo of ${variable['name']} completely`);
+    return yaml.stringify(rawObj);
+  } catch (e) {
+    console.log(`[error]: ${e}`);
+    notify(`${variable['name']} get subscription information failed`, e.message);
+    throw e;
+  }
+};
+
+let subs_info_parser = async (raw, { yaml, axios, console, notify }, { url, name }) => {
+  try {
+    // check nodes_modules
+    if (existsSync(modules_path)) {
+      var _notify = require('../lib/notify');
+      notify = _notify.notify;
+    } else console.log('[warning]: no found node_modules');
+
+    // check yaml
+    try {
+      var rawObj = yaml.parse(raw);
+    } catch (e) {
+      if (
+        e.message === 'Implicit map keys need to be on a single line' &&
+        !new RegExp('^((?!www.example.com).)*$').test(url)
+      ) {
+        console.log('[warning]: raw is not yaml');
+        rawObj = { proxies: [], 'proxy-groups': [], rules: [] };
+      } else {
+        console.log('[error]: check yaml fail');
+        console.log(e);
+        throw e;
+      }
+    }
+
+    //check variables.yml
+    if (!existsSync(variable_path)) {
+      console.log('[warning]: no found ./scripts/variables.yml');
+      return yaml.stringify(rawObj);
+    }
+    var _variables = yaml.parse(readFileSync(variable_path, 'utf-8'));
+    if (!_variables['subs_info_domains']) {
+      console.log('[warning]: no found subs_info_domains variables');
+      return yaml.stringify(rawObj);
+    } else var variables = _variables['subs_info_domains'];
+    raw = yaml.stringify(rawObj);
+
+    //try fetch subs-info
+    console.log('[info]: subs_info_domains variables:');
+    console.log(JSON.stringify(variables, null, 2));
+    if (variables) var variables_filter = variables.filter(item => item.url != url);
+    variables_filter.unshift({ url: url, name: name });
+    console.log('[info]: subs_info_domains_filter variables:');
+    console.log(JSON.stringify(variables_filter, null, 2));
+    for (let i = 0; i < variables_filter.length; i++) {
+      raw = await subs_info_parse(
+        raw,
+        { yaml, axios, console, notify },
+        { variable: variables_filter[i] }
       );
-      console.log(`[info]: fetch subscription-userinfo of ${names[i]} completely`);
     }
     return raw;
   } catch (e) {

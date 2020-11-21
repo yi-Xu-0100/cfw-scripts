@@ -1,2 +1,4 @@
 node_modules/
 scripts/variables.json
+scripts/variables.yml
+scripts/rule-providers.yml

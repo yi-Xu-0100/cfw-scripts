@@ -4,12 +4,37 @@
  * [breaking changes]: https://github.com/Dreamacro/clash/wiki/breaking-changes-in-1.0.0
  */
 
-const { notify } = require('../lib/notify');
+const { existsSync } = require('fs');
+const { resolve } = require('path');
+var modules_path = resolve(__dirname, '../node_modules');
 
-let change_keys = (raw, { yaml, console }, { name }) => {
+let change_keys = (raw, { yaml, console, notify }, { url, name }) => {
   try {
+    // check nodes_modules
+    if (existsSync(modules_path)) {
+      var _notify = require('../lib/notify');
+      notify = _notify.notify;
+    } else console.log('[warning]: no found node_modules');
+
+    // check yaml
+    try {
+      var rawObj = yaml.parse(raw);
+    } catch (e) {
+      if (
+        e.message === 'Implicit map keys need to be on a single line' &&
+        !new RegExp('^((?!www.example.com).)*$').test(url)
+      ) {
+        console.log('[warning]: raw is not yaml');
+        rawObj = { proxies: [], 'proxy-groups': [], rules: [] };
+      } else {
+        console.log('[error]: check yaml fail');
+        console.log(e);
+        throw e;
+      }
+    }
+
+    //try change keys
     console.log(`[info]: start change keys at ${new Date()}`);
-    const rawObj = yaml.parse(raw);
     if (rawObj['Rule'] && rawObj['Proxy Group'] && rawObj['Proxy']) {
       console.log(`[info]: found old keys in ${name} yaml`);
       var { Rule: rules = [], 'Proxy Group': groups = [], Proxy: proxies = [] } = rawObj;

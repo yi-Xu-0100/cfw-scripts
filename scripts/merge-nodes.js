@@ -5,29 +5,59 @@
  * @param {string[]} [keys = []] - The proxy name include keys will be merged.
  */
 
-const { notify } = require('../lib/notify');
-const { readFileSync } = require('fs');
+const { readFileSync, existsSync } = require('fs');
 const { resolve } = require('path');
-const variable_path = resolve(__dirname, './variables.json');
-let _variables = JSON.parse(readFileSync(variable_path, 'utf-8'));
-let variables = _variables['merge-nodes'];
-let keys = variables.keys;
-let names = variables['names'];
+var modules_path = resolve(__dirname, '../node_modules');
+const variable_path = resolve(__dirname, './variables.yml');
 let debug = false;
 
-let merge_nodes = async (raw, { yaml, console }, { name }) => {
-  console.log(`[info]: start merge nodes in ${name} at ${new Date()}`);
+let merge_nodes = async (raw, { yaml, console, notify }, { url, name }) => {
   try {
-    var rawObj = yaml.parse(raw);
-    if (keys.length != 0) {
-      console.log('[info]: merge-nodes variables:');
-      console.log(JSON.stringify(variables, null, 2));
+    // check nodes_modules
+    if (existsSync(modules_path)) {
+      var _notify = require('../lib/notify');
+      notify = _notify.notify;
+    } else console.log('[warning]: no found node_modules');
+
+    // check yaml
+    try {
+      var rawObj = yaml.parse(raw);
+    } catch (e) {
+      if (
+        e.message === 'Implicit map keys need to be on a single line' &&
+        !new RegExp('^((?!www.example.com).)*$').test(url)
+      ) {
+        console.log('[warning]: raw is not yaml');
+        rawObj = { proxies: [], 'proxy-groups': [], rules: [] };
+      } else {
+        console.log('[error]: check yaml fail');
+        console.log(e);
+        throw e;
+      }
+    }
+
+    //check variables.yml
+    if (!existsSync(variable_path)) {
+      console.log('[warning]: no found ./scripts/variables.yml');
+      return yaml.stringify(rawObj);
+    }
+    var _variables = yaml.parse(readFileSync(variable_path, 'utf-8'));
+    if (!_variables['merge_nodes']) {
+      console.log('[warning]: no found merge_nodes variables');
+      return yaml.stringify(rawObj);
+    } else var variables = _variables['merge_nodes'];
+    raw = yaml.stringify(rawObj);
+
+    console.log(`[info]: start merge nodes in ${name} at ${new Date()}`);
+    if (variables.length != 0) {
+      console.log('[info]: merge_nodes variables:');
+      console.log(yaml.stringify(variables, null, 2));
       let _proxy = ['DIRECT', 'AUTO'];
       let _auto = [];
       let _other = [];
-      for (let i = 0; i < names.length; i++) {
+      for (let i = 0; i < variables.length; i++) {
         _other.push({
-          name: names[i],
+          name: variables[i]['name'],
           type: 'select',
           proxies: []
         });
@@ -38,51 +68,51 @@ let merge_nodes = async (raw, { yaml, console }, { name }) => {
         proxies: []
       });
       if (debug) {
-        console.log(`[debug]: ${JSON.stringify(_other)}`);
-        console.log(`[debug]: ${JSON.stringify(rawObj['proxies'])}`);
+        console.log(`[debug]: ${yaml.stringify(_other)}`);
+        console.log(`[debug]: ${yaml.stringify(rawObj['proxies'])}`);
       }
-      for (let i = 0; i < rawObj['proxies'].length; i++) {
-        if (debug)
-          console.log(`[debug]: rawObj['proxies'][${i}]['name']: ${rawObj['proxies'][i]['name']}`);
+      rawObj['proxies'].forEach(proxy => {
+        if (debug) console.log(`[debug]: proxy['name']: ${proxy['name']}`);
         let check = false;
-        for (let j = 0; j < keys.length; j++) {
-          if (debug) console.log(`[debug]: keys[${i}]: ${keys[j]}`);
-          if (rawObj['proxies'][i]['name'].search(keys[j]) != -1) {
+        for (let i = 0; i < variables.length; i++) {
+          if (debug) console.log(`[debug]: variables[${i}]: ${variables[i]}`);
+          variables[i]['keys'].forEach(key => {
+            if (proxy['name'].search(key) != -1) {
+              if (debug) console.log(`[debug]: add ${proxy['name']} into ${variables[i]['name']}`);
+              _other[i]['proxies'].push(proxy['name']);
+              check = true;
+            }
+          });
+          if (i === variables.length - 1 && check === false) {
             if (debug)
-              console.log(`[debug]: add proxy name [${i}] into _other[${j}] ${_other[j]['name']}`);
-            _other[j]['proxies'].push(rawObj['proxies'][i]['name']);
-            check = true;
-          }
-          if (j === keys.length - 1 && check === false) {
-            if (debug)
-              console.log(`[debug]: add proxy name [${i}] into _other[${keys.length}] OTHER`);
-            _other[keys.length]['proxies'].push(rawObj['proxies'][i]['name']);
+              console.log(`[debug]: add ${proxy['name']} into ${variables[i + 1]['name']}`);
+            _other[i + 1]['proxies'].push(proxy['name']);
           }
         }
-      }
+      });
       if (debug) {
         console.log(`[debug]: _other[${_other.length}]:`);
-        console.log(JSON.stringify(_other));
+        console.log(yaml.stringify(_other));
       }
       let _other_filter = _other.filter(item => item['proxies'].length != 0);
       if (debug) {
         console.log(`[debug]: _other_filter[${_other_filter.length}]:`);
-        console.log(JSON.stringify(_other_filter));
+        console.log(yaml.stringify(_other_filter));
       }
-      rawObj['proxy-groups'][0]['proxies'] = JSON.parse(
-        JSON.stringify(_proxy.concat(_other_filter.map(item => item['name'])))
+      rawObj['proxy-groups'][0]['proxies'] = yaml.parse(
+        yaml.stringify(_proxy.concat(_other_filter.map(item => item['name'])))
       );
-      rawObj['proxy-groups'][1]['proxies'] = JSON.parse(
-        JSON.stringify(_auto.concat(_other_filter.map(item => item['name'])))
+      rawObj['proxy-groups'][1]['proxies'] = yaml.parse(
+        yaml.stringify(_auto.concat(_other_filter.map(item => item['name'])))
       );
-      rawObj['proxy-groups'] = JSON.parse(
-        JSON.stringify(rawObj['proxy-groups'].concat(_other_filter))
+      rawObj['proxy-groups'] = yaml.parse(
+        yaml.stringify(rawObj['proxy-groups'].concat(_other_filter))
       );
     } else {
       console.log('[warning]: keys need to set.');
       console.log(`[info]: ${name} merge nodes completely`);
     }
-    return JSON.stringify(rawObj);
+    return yaml.stringify(rawObj);
   } catch (e) {
     console.log(`[error]: ${e}`);
     notify(`merge-nodes failed`, e.message);

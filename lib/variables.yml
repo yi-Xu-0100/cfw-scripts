@@ -1,0 +1,58 @@
+subs_info_domains:
+  - url: ''
+    name: ''
+merge_nodes:
+  - name: HK
+    keys:
+      - HK
+      - 香港
+  - name: NF
+    keys:
+      - NF
+      - 奈飞
+  - name: SZ-HK
+    keys:
+      - SZ-HK
+      - 深港
+  - name: SGP
+    keys:
+      - SGP
+      - 狮城
+  - name: JP
+    keys:
+      - JP
+      - 日本
+  - name: KOR
+    keys:
+      - KOR
+      - 韩国
+  - name: USA
+    keys:
+      - USA
+      - 美国
+  - name: RUS
+    keys:
+      - RUS
+      - 俄国
+  - name: AUS
+    keys:
+      - AUS
+      - 澳洲
+  - name: TW
+    keys:
+      - TW
+      - 台湾
+  - name: DEU
+    keys:
+      - DEU
+      - 德国
+  - name: V2
+    keys:
+      - V2
+      - vmess
+auto_check_in:
+  - name: ''
+    domain: ''
+    keep: ''
+    email: ''
+    pwd: ''
