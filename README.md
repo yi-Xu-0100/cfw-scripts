@@ -19,11 +19,11 @@ Some scripts for [`parser`](https://docs.cfw.lbyczf.com/contents/parser.html) in
 - [🎨 Table of Contents](#-table-of-contents)
 - [🚀 Usage](#-usage)
   - [📝 setup repository with git and npm](#-setup-repository-with-git-and-npm)
-  - [📝 Setup parser for `auto-check-in.js`](#-setup-parser-for-auto-check-injs)
-  - [📝 Setup parser for `subs-info-parser.js`](#-setup-parser-for-subs-info-parserjs)
   - [📝 Setup parser for `change-keys.js`](#-setup-parser-for-change-keysjs)
   - [📝 Setup parser for `change-rules.js`](#-setup-parser-for-change-rulesjs)
   - [📝 Setup parser for `merge-nodes.js`](#-setup-parser-for-merge-nodesjs)
+  - [📝 Setup parser for `auto-check-in.js`](#-setup-parser-for-auto-check-injs)
+  - [📝 Setup parser for `subs-info-parser.js`](#-setup-parser-for-subs-info-parserjs)
 - [📝 Scripts](#-scripts)
 - [🍱 Libraries](#-libraries)
 - [🔊 CHANGELOG](#-changelog)
@@ -42,39 +42,7 @@ npm ci
 npm run start
 ```
 
-The notify will be test and copy `./lib/variables.json` to `./scripts/variables.json`. **You can set variables in `./scripts/variables.json`, and the file will include in `.gitignore`.**
-
-### 📝 Setup parser for `auto-check-in.js`
-
-**The script was used to automatic check in. The variables need to be set in `./scripts/variables.json`.**
-
-Set the example subscription link for using the `auto-check-in.js`, and set the update interval in 1 hour(optional).
-
-![checkin subscription example](./resources/checkin.png)
-
-You can set the parsers with `reg` to fit the example link with `q=checkin`.
-
-```yaml
-parsers:
-  - reg: .*example.*q=checkin$
-    file: 'D:/Applications/cfw-scripts/scripts/auto-check-in.js' #set the path of `auto-check-in.js`.
-```
-
-### 📝 Setup parser for `subs-info-parser.js`
-
-**The script was used to get subscription information of domains. The variables need to be set in `./scripts/variables.json`.**
-
-Set the example subscription link for using the `subs-info-parser.js`, and set the update interval in 6 hour(optional).
-
-![subscription example](./resources/subscription-info.png)
-
-You can set the parsers with `reg` to fit the example link with `q=subscription`.
-
-```yaml
-parsers:
-  - reg: .*example.*q=subscription$
-    file: 'D:/Applications/cfw-scripts/scripts/subs-info-parser.js' #set the path of `subs-info-parser.js`.
-```
+The notify will be test and copy `./lib/variables.yml` and `./lib/rule-providers.yml` to `./scripts/variables.yml` and `./scripts/rule-providers.yml`. **You can set variables in `./scripts/variables.yml` and set personal rule in `./scripts/rule-providers.yml`, and the files will include in `.gitignore`.**
 
 ### 📝 Setup parser for `change-keys.js`
 
@@ -82,7 +50,7 @@ parsers:
 
 You can set the parsers with `reg` to fit the all link without string `www.example.com`.
 
-```yaml
+```yml
 parsers:
   - reg: ^((?!www\.example\.com).)*$
     file: 'D:/Applications/cfw-scripts/scripts/change-keys.js' #set the path of `change-keys.js`.
@@ -94,7 +62,7 @@ parsers:
 
 You can set the parsers with `reg` to fit the all link without string `www.example.com`.
 
-```yaml
+```yml
 parsers:
   - reg: ^((?!www\.example\.com).)*$
     file: 'D:/Applications/cfw-scripts/scripts/change-rules.js' #set the path of `change-rules.js`.
@@ -102,31 +70,59 @@ parsers:
 
 ### 📝 Setup parser for `merge-nodes.js`
 
-**The script should use behind `change-rules.js`. The variables need to be set in `./scripts/variables.json`.**
+**The script should use behind `change-rules.js`. The variables need to be set in `./scripts/variables.yml`.**
 
 You can set the parsers with `reg` to fit the all link without string `www.example.com`.
 
-```yaml
+```yml
 parsers:
   - reg: ^((?!www\.example\.com).)*$
     file: 'D:/Applications/cfw-scripts/scripts/merge-nodes.js' #set the path of `merge-nodes.js`.
 ```
 
+### 📝 Setup parser for `auto-check-in.js`
+
+**The script was used to automatic check in. The variables need to be set in `./scripts/variables.yml`.**
+
+You can set the parsers with `reg` to fit the all link without string `www.example.com`.
+
+```yml
+parsers:
+  - reg: ^((?!www\.example\.com).)*$
+    file: 'D:/Applications/cfw-scripts/scripts/auto-check-in.js' #set the path of `auto-check-in.js`.
+```
+
+**It will add fake node into `proxies` and add `CHECK-INFO` into the end of `proxy-groups`. Be careful to edit the subscription later.**
+
+### 📝 Setup parser for `subs-info-parser.js`
+
+**The script was used to get subscription information of domains. The variables need to be set in `./scripts/variables.yml`.**
+
+You can set the parsers with `reg` to fit the all link without string `www.example.com`.
+
+```yml
+parsers:
+  - reg: ^((?!www\.example\.com).)*$
+    file: 'D:/Applications/cfw-scripts/scripts/subs-info-parser.js' #set the path of `subs-info-parser.js`.
+```
+
+**It will add fake node into `proxies` and add `SUBS-INFO` into the end of `proxy-groups`. Be careful to edit the subscription later.**
+
 ## 📝 Scripts
 
 |         name          |         description          |    variables     |
 | :-------------------: | :--------------------------: | :--------------: |
-| [subs-info-parser.js] | get subscription information | subs-info-parser |
-|  [auto-check-in.js]   |        auto check in         |  auto-check-in   |
 |   [change-keys.js]    |     fit new version key      |                  |
 |   [change-rules.js]   |      add personal rule       |                  |
 |   [merge-nodes.js]    |         merge nodes          |   merge-nodes    |
+| [subs-info-parser.js] | get subscription information | subs-info-parser |
+|  [auto-check-in.js]   |        auto check in         |  auto-check-in   |
 
-[subs-info-parser.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/subs-info-parser.js
-[auto-check-in.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/auto-check-in.js
 [change-keys.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/change-keys.js
 [change-rules.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/change-rules.js
 [merge-nodes.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/merge-nodes.js
+[subs-info-parser.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/subs-info-parser.js
+[auto-check-in.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/auto-check-in.js
 
 ## 🍱 Libraries
 

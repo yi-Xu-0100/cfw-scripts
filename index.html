@@ -65,11 +65,11 @@
 <li><a href="#-usage">🚀 Usage</a>
 <ul>
 <li><a href="#-setup-repository-with-git-and-npm">📝 setup repository with git and npm</a></li>
-<li><a href="#-setup-parser-for-auto-check-injs">📝 Setup parser for <code>auto-check-in.js</code></a></li>
-<li><a href="#-setup-parser-for-subs-info-parserjs">📝 Setup parser for <code>subs-info-parser.js</code></a></li>
 <li><a href="#-setup-parser-for-change-keysjs">📝 Setup parser for <code>change-keys.js</code></a></li>
 <li><a href="#-setup-parser-for-change-rulesjs">📝 Setup parser for <code>change-rules.js</code></a></li>
 <li><a href="#-setup-parser-for-merge-nodesjs">📝 Setup parser for <code>merge-nodes.js</code></a></li>
+<li><a href="#-setup-parser-for-auto-check-injs">📝 Setup parser for <code>auto-check-in.js</code></a></li>
+<li><a href="#-setup-parser-for-subs-info-parserjs">📝 Setup parser for <code>subs-info-parser.js</code></a></li>
 </ul>
 </li>
 <li><a href="#-scripts">📝 Scripts</a></li>
@@ -85,46 +85,44 @@
 npm ci
 npm run start
 </code></pre>
-<p>The notify will be test and copy <code>./lib/variables.json</code> to <code>./scripts/variables.json</code>. <strong>You can set variables in <code>./scripts/variables.json</code>, and the file will include in <code>.gitignore</code>.</strong></p>
-<h3>📝 Setup parser for <code>auto-check-in.js</code></h3>
-<p><strong>The script was used to automatic check in. The variables need to be set in <code>./scripts/variables.json</code>.</strong></p>
-<p>Set the example subscription link for using the <code>auto-check-in.js</code>, and set the update interval in 1 hour(optional).</p>
-<p><img src="./resources/checkin.png" alt="checkin subscription example"></p>
-<p>You can set the parsers with <code>reg</code> to fit the example link with <code>q=checkin</code>.</p>
-<pre class="prettyprint source lang-yaml"><code>parsers:
-  - reg: .*example.*q=checkin$
-    file: 'D:/Applications/cfw-scripts/scripts/auto-check-in.js' #set the path of `auto-check-in.js`.
-</code></pre>
-<h3>📝 Setup parser for <code>subs-info-parser.js</code></h3>
-<p><strong>The script was used to get subscription information of domains. The variables need to be set in <code>./scripts/variables.json</code>.</strong></p>
-<p>Set the example subscription link for using the <code>subs-info-parser.js</code>, and set the update interval in 6 hour(optional).</p>
-<p><img src="./resources/subscription-info.png" alt="subscription example"></p>
-<p>You can set the parsers with <code>reg</code> to fit the example link with <code>q=subscription</code>.</p>
-<pre class="prettyprint source lang-yaml"><code>parsers:
-  - reg: .*example.*q=subscription$
-    file: 'D:/Applications/cfw-scripts/scripts/subs-info-parser.js' #set the path of `subs-info-parser.js`.
-</code></pre>
+<p>The notify will be test and copy <code>./lib/variables.yml</code> and <code>./lib/rule-providers.yml</code> to <code>./scripts/variables.yml</code> and <code>./scripts/rule-providers.yml</code>. <strong>You can set variables in <code>./scripts/variables.yml</code> and set personal rule in <code>./scripts/rule-providers.yml</code>, and the files will include in <code>.gitignore</code>.</strong></p>
 <h3>📝 Setup parser for <code>change-keys.js</code></h3>
 <p><strong>The script was used to change keys for fitting <a href="https://github.com/Dreamacro/clash/wiki/breaking-changes-in-1.0.0">breaking changes</a> in clash v1.0.0.</strong></p>
 <p>You can set the parsers with <code>reg</code> to fit the all link without string <code>www.example.com</code>.</p>
-<pre class="prettyprint source lang-yaml"><code>parsers:
+<pre class="prettyprint source lang-yml"><code>parsers:
   - reg: ^((?!www\.example\.com).)*$
     file: 'D:/Applications/cfw-scripts/scripts/change-keys.js' #set the path of `change-keys.js`.
 </code></pre>
 <h3>📝 Setup parser for <code>change-rules.js</code></h3>
 <p><strong>The script will use <a href="https://lancellc.gitbook.io/clash/clash-config-file/rule-provider"><code>rule-providers</code></a> with <a href="https://github.com/Loyalsoldier/clash-rules"><code>Loyalsoldier/clash-rules</code></a>.</strong></p>
 <p>You can set the parsers with <code>reg</code> to fit the all link without string <code>www.example.com</code>.</p>
-<pre class="prettyprint source lang-yaml"><code>parsers:
+<pre class="prettyprint source lang-yml"><code>parsers:
   - reg: ^((?!www\.example\.com).)*$
     file: 'D:/Applications/cfw-scripts/scripts/change-rules.js' #set the path of `change-rules.js`.
 </code></pre>
 <h3>📝 Setup parser for <code>merge-nodes.js</code></h3>
-<p><strong>The script should use behind <code>change-rules.js</code>. The variables need to be set in <code>./scripts/variables.json</code>.</strong></p>
+<p><strong>The script should use behind <code>change-rules.js</code>. The variables need to be set in <code>./scripts/variables.yml</code>.</strong></p>
 <p>You can set the parsers with <code>reg</code> to fit the all link without string <code>www.example.com</code>.</p>
-<pre class="prettyprint source lang-yaml"><code>parsers:
+<pre class="prettyprint source lang-yml"><code>parsers:
   - reg: ^((?!www\.example\.com).)*$
     file: 'D:/Applications/cfw-scripts/scripts/merge-nodes.js' #set the path of `merge-nodes.js`.
 </code></pre>
+<h3>📝 Setup parser for <code>auto-check-in.js</code></h3>
+<p><strong>The script was used to automatic check in. The variables need to be set in <code>./scripts/variables.yml</code>.</strong></p>
+<p>You can set the parsers with <code>reg</code> to fit the all link without string <code>www.example.com</code>.</p>
+<pre class="prettyprint source lang-yml"><code>parsers:
+  - reg: ^((?!www\.example\.com).)*$
+    file: 'D:/Applications/cfw-scripts/scripts/auto-check-in.js' #set the path of `auto-check-in.js`.
+</code></pre>
+<p><strong>It will add fake node into <code>proxies</code> and add <code>CHECK-INFO</code> into the end of <code>proxy-groups</code>. Be careful to edit the subscription later.</strong></p>
+<h3>📝 Setup parser for <code>subs-info-parser.js</code></h3>
+<p><strong>The script was used to get subscription information of domains. The variables need to be set in <code>./scripts/variables.yml</code>.</strong></p>
+<p>You can set the parsers with <code>reg</code> to fit the all link without string <code>www.example.com</code>.</p>
+<pre class="prettyprint source lang-yml"><code>parsers:
+  - reg: ^((?!www\.example\.com).)*$
+    file: 'D:/Applications/cfw-scripts/scripts/subs-info-parser.js' #set the path of `subs-info-parser.js`.
+</code></pre>
+<p><strong>It will add fake node into <code>proxies</code> and add <code>SUBS-INFO</code> into the end of <code>proxy-groups</code>. Be careful to edit the subscription later.</strong></p>
 <h2>📝 Scripts</h2>
 <table>
 <thead>
@@ -135,16 +133,6 @@ npm run start
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:center"><a href="https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/subs-info-parser.js">subs-info-parser.js</a></td>
-<td style="text-align:center">get subscription information</td>
-<td style="text-align:center">subs-info-parser</td>
-</tr>
-<tr>
-<td style="text-align:center"><a href="https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/auto-check-in.js">auto-check-in.js</a></td>
-<td style="text-align:center">auto check in</td>
-<td style="text-align:center">auto-check-in</td>
-</tr>
 <tr>
 <td style="text-align:center"><a href="https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/change-keys.js">change-keys.js</a></td>
 <td style="text-align:center">fit new version key</td>
@@ -159,6 +147,16 @@ npm run start
 <td style="text-align:center"><a href="https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/merge-nodes.js">merge-nodes.js</a></td>
 <td style="text-align:center">merge nodes</td>
 <td style="text-align:center">merge-nodes</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/subs-info-parser.js">subs-info-parser.js</a></td>
+<td style="text-align:center">get subscription information</td>
+<td style="text-align:center">subs-info-parser</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/auto-check-in.js">auto-check-in.js</a></td>
+<td style="text-align:center">auto check in</td>
+<td style="text-align:center">auto-check-in</td>
 </tr>
 </tbody>
 </table>
@@ -214,7 +212,7 @@ npm run start
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Sat Nov 21 2020 07:59:51 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a> on Sat Nov 21 2020 08:29:50 GMT+0000 (Coordinated Universal Time) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>
