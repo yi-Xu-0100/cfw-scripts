@@ -7,7 +7,7 @@
     "start": "node main.js",
     "lint-check": "prettier --check **/*.{js,yml,yaml,json,md} && eslint .",
     "format": "prettier --write **/*.{js,yml,yaml,json,md} && eslint .",
-    "clear": "rimraf -rf scripts/variables.json"
+    "clear": "rimraf -rf scripts/variables.* scripts/rule-providers.yml"
   },
   "husky": {
     "hooks": {

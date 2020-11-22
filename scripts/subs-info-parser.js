@@ -24,7 +24,7 @@ let subs_info_parse = async (raw, { yaml, axios, console, notify }, { variable }
     console.log(`[info]: start fetch subscription-userinfo at ${new Date()}`);
     const { headers: { 'subscription-userinfo': info } = {} } = await axios.head(variable['url']);
     console.log(`[info]: ${variable['name']} subscription-userinfo: ${info}`);
-    if (!/upload=(\d+)?; download=(\d+)?; total=(\d+)?; expire=(\d+)?/.test(info)) {
+    if (!/upload=(\d+)?; download=(\d+)?; total=(\d+)?(; expire=(\d+)?)?/.test(info)) {
       if (debug) console.log(`[debug]: variable['url']: ${variable['url']}`);
       console.log(`[warning]: No found subscription-userinfo in ${variable['name']}`);
       console.log(`[info]: fetch subscription-userinfo of ${variable['name']} completely`);
@@ -36,8 +36,8 @@ let subs_info_parse = async (raw, { yaml, axios, console, notify }, { variable }
     console.log(`[info]: ${variable['name']} download: ${RegExp.$2} = ${download}`);
     let total = traffic(RegExp.$3 * 1);
     console.log(`[info]: ${variable['name']} total: ${RegExp.$3} = ${total}`);
-    let expire = new Date(RegExp.$4 * 1000).toLocaleString();
-    console.log(`[info]: ${variable['name']} expire: ${RegExp.$4} = ${expire}`);
+    let expire = new Date((RegExp.$4 || 0) * 1000).toLocaleString();
+    console.log(`[info]: ${variable['name']} expire: ${RegExp.$4 || 0} = ${expire}`);
     let used = traffic(RegExp.$1 * 1 + RegExp.$2 * 1);
     console.log(`[info]: ${variable['name']} used: ${RegExp.$1 * 1 + RegExp.$1 * 1} = ${used}`);
     let reserve = traffic(RegExp.$3 * 1 - RegExp.$1 * 1 - RegExp.$2 * 1);
@@ -124,8 +124,12 @@ let subs_info_parser = async (raw, { yaml, axios, console, notify }, { url, name
     //try fetch subs-info
     console.log('[info]: subs_info_domains variables:');
     console.log(JSON.stringify(variables, null, 2));
+    if (variables[0]['name'] === 'current' && !variables[0]['url']) {
+      console.log('[warring]: do not include current subs-info.');
+      var current = false;
+    } else current = true;
     if (variables) var variables_filter = variables.filter(item => item.url != url);
-    variables_filter.unshift({ url: url, name: name });
+    if (current) variables_filter.unshift({ url: url, name: name });
     console.log('[info]: subs_info_domains_filter variables:');
     console.log(JSON.stringify(variables_filter, null, 2));
     for (let i = 0; i < variables_filter.length; i++) {
