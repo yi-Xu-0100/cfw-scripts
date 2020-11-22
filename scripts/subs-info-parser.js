@@ -124,9 +124,12 @@ let subs_info_parser = async (raw, { yaml, axios, console, notify }, { url, name
     //try fetch subs-info
     console.log('[info]: subs_info_domains variables:');
     console.log(JSON.stringify(variables, null, 2));
+    console.log(!variables[0]['url']);
+    console.log(variables[0]['name'] === 'current');
     if (variables[0]['name'] === 'current' && !variables[0]['url']) {
       console.log('[warring]: do not include current subs-info.');
       var current = false;
+      variables.shift();
     } else current = true;
     if (variables) var variables_filter = variables.filter(item => item.url != url);
     if (current) variables_filter.unshift({ url: url, name: name });
@@ -142,6 +145,7 @@ let subs_info_parser = async (raw, { yaml, axios, console, notify }, { url, name
     return raw;
   } catch (e) {
     console.log(`[error]: ${e}`);
+    console.log(e);
     notify(`${name} get subscription information failed`, e.message);
     throw e;
   }
