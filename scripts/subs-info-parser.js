@@ -36,8 +36,13 @@ let subs_info_parse = async (raw, { yaml, axios, console, notify }, { variable }
     console.log(`[info]: ${variable['name']} download: ${RegExp.$2} = ${download}`);
     let total = traffic(RegExp.$3 * 1);
     console.log(`[info]: ${variable['name']} total: ${RegExp.$3} = ${total}`);
-    let expire = new Date((RegExp.$4 || 0) * 1000).toLocaleString();
-    console.log(`[info]: ${variable['name']} expire: ${RegExp.$4 || 0} = ${expire}`);
+    if (RegExp.$5) {
+      var expire = new Date(RegExp.$5 * 1000).toLocaleString();
+      console.log(`[info]: ${variable['name']} expire: ${RegExp.$5} = ${expire}`);
+    } else {
+      expire = 'NOT FOUND';
+      console.log(`[warring]: ${variable['name']} expire: NOT FOUND`);
+    }
     let used = traffic(RegExp.$1 * 1 + RegExp.$2 * 1);
     console.log(`[info]: ${variable['name']} used: ${RegExp.$1 * 1 + RegExp.$1 * 1} = ${used}`);
     let reserve = traffic(RegExp.$3 * 1 - RegExp.$1 * 1 - RegExp.$2 * 1);
