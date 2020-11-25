@@ -3,6 +3,13 @@ subs_info_domains:
     name: ''
   - url: ''
     name: ''
+subs_info_config:
+  - url: ''
+    current: true #default
+    expire: true #default
+  - url: ''
+    current: true #default
+    expire: true #default
 merge_nodes:
   - name: HK
     keys:

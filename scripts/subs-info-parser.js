@@ -8,7 +8,7 @@ var { resolve } = require('path');
 var variable_path = resolve(__dirname, './variables.yml');
 var modules_path = resolve(__dirname, '../node_modules');
 var debug = false;
-var current = false;
+var current = true;
 var expire = true;
 
 let traffic = num => {
@@ -120,14 +120,30 @@ let subs_info_parser = async (raw, { yaml, axios, console, notify }, { url, name
 
     //check variables.yml
     if (!existsSync(variable_path)) {
-      console.log('[warning]: no found ./scripts/variables.yml');
+      console.log('[warning]: Not found ./scripts/variables.yml');
       return yaml.stringify(rawObj);
     }
     var _variables = yaml.parse(readFileSync(variable_path, 'utf-8'));
     if (!_variables['subs_info_domains']) {
-      console.log('[warning]: no found subs_info_domains variables');
+      console.log('[warning]: Not found subs_info_domains variables');
       return yaml.stringify(rawObj);
     } else var variables = _variables['subs_info_domains'];
+    if (!_variables['subs_info_config']) {
+      console.log('[warning]: Not found subs_info_config variables');
+    } else {
+      let variables_config = _variables['subs_info_config'].filter(item => item.url === url);
+      if (variables_config.length != 0) {
+        console.log(`[info]: set subs_info_config of ${name}`);
+        if (variables_config[0]['current'] != undefined) current = variables_config[0]['current'];
+        else console.log(`[warning]: Not found current of ${name} in subs_info_config`);
+        if (variables_config[0]['expire'] != undefined) expire = variables_config[0]['expire'];
+        else console.log(`[warning]: Not found expire of ${name} in subs_info_config`);
+      } else {
+        console.log(`[warning]: Not found url of ${name} in subs_info_config`);
+      }
+    }
+    console.log(`[info]: current = ${current}`);
+    console.log(`[info]: expire = ${expire}`);
     raw = yaml.stringify(rawObj);
 
     //try fetch subs-info
@@ -150,6 +166,8 @@ let subs_info_parser = async (raw, { yaml, axios, console, notify }, { url, name
       }
     }
     for (let i = 0; i < variables_filter.length; i++) {
+      console.log('[info]: variables_filter[i]:');
+      console.log(variables_filter[i]);
       raw = await subs_info_parse(
         raw,
         { yaml, axios, console, notify },

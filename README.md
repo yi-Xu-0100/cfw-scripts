@@ -108,7 +108,7 @@ parsers:
 
 **It will add fake node into `proxies` and add `SUBS-INFO` into the end of `proxy-groups`. Be careful to edit the subscription later.**
 
-You can set the default variables for `current` and `expire`. The `current` for controlling whether the subscription information of current URL showing, and The `expire` for controlling whether the expiry time of subscription information showing.
+You can set `current` and `expire` in `./scripts/variables.yml` with `subs_info_config`. The `current` for controlling whether the subscription information of current URL showing, and The `expire` for controlling whether the expiry time of subscription information showing.(The subscription information of domains in variables will all show. See in[example](https://github.com/yi-Xu-0100/cfw-scripts/tree/main/lib/variables.js))
 
 ## 📝 Scripts
 
