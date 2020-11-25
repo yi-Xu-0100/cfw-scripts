@@ -7,7 +7,9 @@ var { readFileSync, existsSync } = require('fs');
 var { resolve } = require('path');
 var variable_path = resolve(__dirname, './variables.yml');
 var modules_path = resolve(__dirname, '../node_modules');
-let debug = false;
+var debug = false;
+var current = false;
+var expire = true;
 
 let traffic = num => {
   const s = ['B', 'KB', 'MB', 'GB', 'TB'];
@@ -37,10 +39,10 @@ let subs_info_parse = async (raw, { yaml, axios, console, notify }, { variable }
     let total = traffic(RegExp.$3 * 1);
     console.log(`[info]: ${variable['name']} total: ${RegExp.$3} = ${total}`);
     if (RegExp.$5) {
-      var expire = new Date(RegExp.$5 * 1000).toLocaleString();
-      console.log(`[info]: ${variable['name']} expire: ${RegExp.$5} = ${expire}`);
+      var _expire = new Date(RegExp.$5 * 1000).toLocaleString();
+      console.log(`[info]: ${variable['name']} expire: ${RegExp.$5} = ${_expire}`);
     } else {
-      expire = 'NOT FOUND';
+      _expire = 'NOT FOUND';
       console.log(`[warring]: ${variable['name']} expire: NOT FOUND`);
     }
     let used = traffic(RegExp.$1 * 1 + RegExp.$2 * 1);
@@ -52,34 +54,36 @@ let subs_info_parse = async (raw, { yaml, axios, console, notify }, { variable }
       } = ${reserve}`
     );
     var rawObj = yaml.parse(raw);
-    rawObj['proxies'].push(
-      {
-        name: `[${variable['name']}]剩余流量：${reserve}`,
-        server: 'server',
-        type: 'socks5',
-        port: 443
-      },
-      {
-        name: `[${variable['name']}]到期时间：${expire}`,
-        server: 'server',
-        type: 'socks5',
-        port: 443
-      }
-    );
+    rawObj['proxies'].push({
+      name: `[${variable['name']}]剩余流量：${reserve}`,
+      server: 'server',
+      type: 'socks5',
+      port: 443
+    });
     if (
       rawObj['proxy-groups'].length === 0 ||
       rawObj['proxy-groups'][rawObj['proxy-groups'].length - 1]['name'] != 'SUBS-INFO'
-    ) {
+    )
       rawObj['proxy-groups'].push({
         name: 'SUBS-INFO',
         type: 'select',
         proxies: []
       });
-    }
+
     rawObj['proxy-groups'][rawObj['proxy-groups'].length - 1]['proxies'].push(
-      `[${variable['name']}]剩余流量：${reserve}`,
-      `[${variable['name']}]到期时间：${expire}`
+      `[${variable['name']}]剩余流量：${reserve}`
     );
+    if (expire) {
+      rawObj['proxies'].push({
+        name: `[${variable['name']}]到期时间：${_expire}`,
+        server: 'server',
+        type: 'socks5',
+        port: 443
+      });
+      rawObj['proxy-groups'][rawObj['proxy-groups'].length - 1]['proxies'].push(
+        `[${variable['name']}]到期时间：${_expire}`
+      );
+    }
     console.log(`[info]: fetch subscription-userinfo of ${variable['name']} completely`);
     return yaml.stringify(rawObj);
   } catch (e) {
@@ -127,19 +131,24 @@ let subs_info_parser = async (raw, { yaml, axios, console, notify }, { url, name
     raw = yaml.stringify(rawObj);
 
     //try fetch subs-info
-    console.log('[info]: subs_info_domains variables:');
-    console.log(JSON.stringify(variables, null, 2));
-    console.log(!variables[0]['url']);
-    console.log(variables[0]['name'] === 'current');
-    if (variables[0]['name'] === 'current' && !variables[0]['url']) {
-      console.log('[warring]: do not include current subs-info.');
-      var current = false;
-      variables.shift();
-    } else current = true;
-    if (variables) var variables_filter = variables.filter(item => item.url != url);
-    if (current) variables_filter.unshift({ url: url, name: name });
-    console.log('[info]: subs_info_domains_filter variables:');
-    console.log(JSON.stringify(variables_filter, null, 2));
+    var variables_filter = variables;
+    if (!variables_filter) {
+      console.log('[warning]: subs_info_domains variables not found!');
+      if (current) {
+        variables_filter.unshift({ url: url, name: name });
+        console.log('[info]: subs_info_domains_filter variables:');
+        console.log(JSON.stringify(variables_filter, null, 2));
+      } else return raw;
+    } else {
+      console.log('[info]: subs_info_domains variables:');
+      console.log(JSON.stringify(variables, null, 2));
+      if (current) {
+        variables_filter = variables.filter(item => item.url != url);
+        variables_filter.unshift({ url: url, name: name });
+        console.log('[info]: subs_info_domains_filter variables:');
+        console.log(JSON.stringify(variables_filter, null, 2));
+      }
+    }
     for (let i = 0; i < variables_filter.length; i++) {
       raw = await subs_info_parse(
         raw,

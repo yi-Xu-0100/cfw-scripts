@@ -1,6 +1,8 @@
 subs_info_domains:
   - url: ''
     name: ''
+  - url: ''
+    name: ''
 merge_nodes:
   - name: HK
     keys:
@@ -51,6 +53,11 @@ merge_nodes:
       - V2
       - vmess
 auto_check_in:
+  - name: ''
+    domain: ''
+    keep: ''
+    email: ''
+    pwd: ''
   - name: ''
     domain: ''
     keep: ''
