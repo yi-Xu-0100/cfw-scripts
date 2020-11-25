@@ -108,6 +108,8 @@ parsers:
 
 **It will add fake node into `proxies` and add `SUBS-INFO` into the end of `proxy-groups`. Be careful to edit the subscription later.**
 
+You can set the default variables for `current` and `expire`. The `current` for controlling whether the subscription information of current URL showing, and The `expire` for controlling whether the expiry time of subscription information showing.
+
 ## 📝 Scripts
 
 |         name          |         description          |    variables     |
