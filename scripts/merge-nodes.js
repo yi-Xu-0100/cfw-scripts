@@ -58,13 +58,17 @@ let merge_nodes = async (raw, { yaml, console, notify }, { url, name }) => {
       for (let i = 0; i < variables.length; i++) {
         _other.push({
           name: variables[i]['name'],
-          type: 'select',
+          type: 'url-test',
+          url: 'http://www.gstatic.com/generate_204',
+          interval: 300,
           proxies: []
         });
       }
       _other.push({
         name: '🐟 OTHER',
-        type: 'select',
+        type: 'url-test',
+        url: 'http://www.gstatic.com/generate_204',
+        interval: 300,
         proxies: []
       });
       if (debug) {
@@ -105,6 +109,10 @@ let merge_nodes = async (raw, { yaml, console, notify }, { url, name }) => {
       rawObj['proxy-groups'][1]['proxies'] = yaml.parse(
         yaml.stringify(_auto.concat(_other_filter.map(item => item['name'])))
       );
+      if (rawObj['proxy-groups'][1]['proxies'].indexOf('🐟 OTHER') != -1) {
+        let lastNode = rawObj['proxy-groups'][1]['proxies'].pop();
+        console.log(`[info]: delete lastNode[${lastNode}] in ♻️ AUTO`);
+      }
       rawObj['proxy-groups'] = yaml.parse(
         yaml.stringify(rawObj['proxy-groups'].concat(_other_filter))
       );
