@@ -54,7 +54,7 @@ let change_rules = (raw, { yaml, console, notify }, { name, url }) => {
       rule_providers['proxy-groups'][0]['proxies'].push(rawObj['proxies'][i].name);
       rule_providers['proxy-groups'][1]['proxies'].push(rawObj['proxies'][i].name);
     }
-    rule_providers['proxy-groups'][0]['proxies'].unshift('DIRECT', 'AUTO');
+    rule_providers['proxy-groups'][0]['proxies'].unshift('DIRECT', '♻️ AUTO');
     console.log('[info]: proxy-groups:');
     console.log(JSON.stringify(rule_providers['proxy-groups'], null, 2));
     console.log(`[info]: change rules of ${name} completely`);

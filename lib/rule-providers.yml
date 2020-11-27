@@ -1,8 +1,8 @@
 proxy-groups:
-  - name: PROXY
+  - name: 🔰 PROXY
     type: select
     proxies: []
-  - name: AUTO
+  - name: ♻️ AUTO
     type: url-test
     url: 'http://www.gstatic.com/generate_204'
     interval: 300
@@ -99,8 +99,8 @@ rules:
   - 'RULE-SET,icloud,DIRECT'
   - 'RULE-SET,apple,DIRECT'
   - 'RULE-SET,google,DIRECT'
-  - 'RULE-SET,proxy,PROXY'
+  - 'RULE-SET,proxy,🔰 PROXY'
   - 'RULE-SET,direct,DIRECT'
   - 'GEOIP,,DIRECT'
   - 'GEOIP,CN,DIRECT'
-  - 'MATCH,PROXY'
+  - 'MATCH,🔰 PROXY'

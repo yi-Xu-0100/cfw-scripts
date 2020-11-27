@@ -11,50 +11,61 @@ subs_info_config:
     current: true #default
     expire: true #default
 merge_nodes:
-  - name: HK
+  - name: 🇭🇰 HK
     keys:
       - HK
       - 香港
-  - name: NF
+  - name: 🎥 NF
     keys:
       - NF
       - 奈飞
-  - name: SZ-HK
+  - name: 🇭🇰 SZ-HK
     keys:
       - SZ-HK
       - 深港
-  - name: SGP
+  - name: 🇸🇬 SGP
     keys:
       - SGP
       - 狮城
-  - name: JP
+      - 新加坡
+  - name: 🇯🇵 JP
     keys:
       - JP
       - 日本
-  - name: KOR
+  - name: 🇰🇷 KOR
     keys:
       - KOR
       - 韩国
-  - name: USA
+  - name: 🇺🇸 USA
     keys:
       - USA
       - 美国
-  - name: RUS
+  - name: 🇷🇺 RUS
     keys:
       - RUS
       - 俄国
-  - name: AUS
+      - 俄罗斯
+  - name: 🇦🇺 AUS
     keys:
       - AUS
       - 澳洲
-  - name: TW
+      - 澳大利亚
+  - name: 🇹🇼 TW
     keys:
       - TW
       - 台湾
-  - name: DEU
+  - name: 🇩🇪 DEU
     keys:
       - DEU
       - 德国
+  - name: 🇹🇷 TUR
+    keys:
+      - TUR
+      - 土耳其
+  - name: 🇧🇭 BHR
+    keys:
+      - BHR
+      - 巴林
   - name: V2
     keys:
       - V2

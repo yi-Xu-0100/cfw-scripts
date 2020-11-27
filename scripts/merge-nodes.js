@@ -52,7 +52,7 @@ let merge_nodes = async (raw, { yaml, console, notify }, { url, name }) => {
     if (variables.length != 0) {
       console.log('[info]: merge_nodes variables:');
       console.log(yaml.stringify(variables, null, 2));
-      let _proxy = ['DIRECT', 'AUTO'];
+      let _proxy = ['DIRECT', '♻️ AUTO'];
       let _auto = [];
       let _other = [];
       for (let i = 0; i < variables.length; i++) {
@@ -63,7 +63,7 @@ let merge_nodes = async (raw, { yaml, console, notify }, { url, name }) => {
         });
       }
       _other.push({
-        name: 'OTHER',
+        name: '🐟 OTHER',
         type: 'select',
         proxies: []
       });

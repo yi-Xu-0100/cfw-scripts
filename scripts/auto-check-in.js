@@ -100,13 +100,13 @@ let check_in = async (raw, { yaml, axios, console, notify }, { name, variable })
     console.log(JSON.stringify(rawObj['proxy-groups']));
     rawObj['proxies'].push(
       {
-        name: `[${variable['name']}]签到时间：${variable['checkinDate']}`,
+        name: `⏰ [${variable['name']}]签到时间：${variable['checkinDate']}`,
         server: 'server',
         type: 'socks5',
         port: 443
       },
       {
-        name: `[${variable['name']}]签到消息：${variable['checkinMessage']}`,
+        name: `🎁 [${variable['name']}]签到消息：${variable['checkinMessage']}`,
         server: 'server',
         type: 'socks5',
         port: 443
@@ -114,22 +114,22 @@ let check_in = async (raw, { yaml, axios, console, notify }, { name, variable })
     );
     if (
       rawObj['proxy-groups'].length === 0 ||
-      rawObj['proxy-groups'][rawObj['proxy-groups'].length - 1]['name'] != 'CHECK-INFO'
+      rawObj['proxy-groups'][rawObj['proxy-groups'].length - 1]['name'] != '🤚 CHECK-INFO'
     )
       rawObj['proxy-groups'].push({
-        name: 'CHECK-INFO',
+        name: '🤚 CHECK-INFO',
         type: 'select',
         proxies: []
       });
     if (name === variable['name'])
       rawObj['proxy-groups'][rawObj['proxy-groups'].length - 1]['proxies'].unshift(
-        `[${variable['name']}]签到时间：${variable['checkinDate']}`,
-        `[${variable['name']}]签到消息：${variable['checkinMessage']}`
+        `⏰ [${variable['name']}]签到时间：${variable['checkinDate']}`,
+        `🎁 [${variable['name']}]签到消息：${variable['checkinMessage']}`
       );
     else
       rawObj['proxy-groups'][rawObj['proxy-groups'].length - 1]['proxies'].push(
-        `[${variable['name']}]签到时间：${variable['checkinDate']}`,
-        `[${variable['name']}]签到消息：${variable['checkinMessage']}`
+        `⏰ [${variable['name']}]签到时间：${variable['checkinDate']}`,
+        `🎁 [${variable['name']}]签到消息：${variable['checkinMessage']}`
       );
     console.log(`[info]: ${variable['name']} check in completely`);
     return [yaml.stringify(rawObj), variable];

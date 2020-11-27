@@ -55,33 +55,33 @@ let subs_info_parse = async (raw, { yaml, axios, console, notify }, { variable }
     );
     var rawObj = yaml.parse(raw);
     rawObj['proxies'].push({
-      name: `[${variable['name']}]剩余流量：${reserve}`,
+      name: `🛢 [${variable['name']}]剩余流量：${reserve}`,
       server: 'server',
       type: 'socks5',
       port: 443
     });
     if (
       rawObj['proxy-groups'].length === 0 ||
-      rawObj['proxy-groups'][rawObj['proxy-groups'].length - 1]['name'] != 'SUBS-INFO'
+      rawObj['proxy-groups'][rawObj['proxy-groups'].length - 1]['name'] != '⛽ SUBS-INFO'
     )
       rawObj['proxy-groups'].push({
-        name: 'SUBS-INFO',
+        name: '⛽ SUBS-INFO',
         type: 'select',
         proxies: []
       });
 
     rawObj['proxy-groups'][rawObj['proxy-groups'].length - 1]['proxies'].push(
-      `[${variable['name']}]剩余流量：${reserve}`
+      `🛢 [${variable['name']}]剩余流量：${reserve}`
     );
     if (expire) {
       rawObj['proxies'].push({
-        name: `[${variable['name']}]到期时间：${_expire}`,
+        name: `⌛ [${variable['name']}]到期时间：${_expire}`,
         server: 'server',
         type: 'socks5',
         port: 443
       });
       rawObj['proxy-groups'][rawObj['proxy-groups'].length - 1]['proxies'].push(
-        `[${variable['name']}]到期时间：${_expire}`
+        `⌛ [${variable['name']}]到期时间：${_expire}`
       );
     }
     console.log(`[info]: fetch subscription-userinfo of ${variable['name']} completely`);
