@@ -66,6 +66,10 @@ merge_nodes:
     keys:
       - BHR
       - 巴林
+  - name: 🇳🇱 NLD
+    keys:
+      - NLD
+      - 荷兰
   - name: V2
     keys:
       - V2
