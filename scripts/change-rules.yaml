@@ -1,0 +1,5 @@
+prepend-rules:
+  - DOMAIN-SUFFIX,manhuabudang.com,DIRECT
+  - DOMAIN-SUFFIX,v2ex.com,DIRECT
+  - DOMAIN-SUFFIX,osapublishing.org,🔰 PROXY
+  - DOMAIN-SUFFIX,phicomm.me,DIRECT
