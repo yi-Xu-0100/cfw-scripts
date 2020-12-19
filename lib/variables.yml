@@ -74,6 +74,10 @@ merge_nodes:
     keys:
       - V2
       - vmess
+  - name: 🇮🇳 IND
+    keys:
+      - IND
+      - 印度
 auto_check_in:
   - name: ''
     domain: ''
