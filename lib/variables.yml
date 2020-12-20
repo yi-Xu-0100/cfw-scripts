@@ -78,6 +78,10 @@ merge_nodes:
     keys:
       - IND
       - 印度
+  - name: 🇮🇹 ITA
+    keys:
+      - ITA
+      - 意大利
 auto_check_in:
   - name: ''
     domain: ''
