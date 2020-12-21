@@ -82,6 +82,11 @@ merge_nodes:
     keys:
       - ITA
       - 意大利
+  - name: 🎶 MUSIC
+    keys:
+      - MUSIC
+      - music
+      - Music
 auto_check_in:
   - name: ''
     domain: ''
