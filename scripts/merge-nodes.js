@@ -110,12 +110,14 @@ let merge_nodes = async (raw, { yaml, console, notify }, { url, name }) => {
         yaml.stringify(_auto.concat(_other_filter.map(item => item['name'])))
       );
       if (rawObj['proxy-groups'][1]['proxies'].indexOf('🐟 OTHER') != -1) {
-        let lastNode = rawObj['proxy-groups'][1]['proxies'].pop();
-        console.log(`[info]: delete lastNode[${lastNode}] in ♻️ AUTO`);
+        let other_index = rawObj['proxy-groups'][1]['proxies'].indexOf('🐟 OTHER');
+        rawObj['proxy-groups'][1]['proxies'].splice(other_index, 1);
+        console.log(`[info]: delete 🐟 OTHER in ♻️ AUTO`);
       }
       if (rawObj['proxy-groups'][1]['proxies'].indexOf('🎶 MUSIC') != -1) {
-        let lastNode = rawObj['proxy-groups'][1]['proxies'].pop();
-        console.log(`[info]: delete lastNode[${lastNode}] in ♻️ AUTO`);
+        let other_index = rawObj['proxy-groups'][1]['proxies'].indexOf('🎶 MUSIC');
+        rawObj['proxy-groups'][1]['proxies'].splice(other_index, 1);
+        console.log(`[info]: delete 🎶 MUSIC in ♻️ AUTO`);
       }
       rawObj['proxy-groups'] = yaml.parse(
         yaml.stringify(rawObj['proxy-groups'].concat(_other_filter))
