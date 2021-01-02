@@ -42,7 +42,11 @@ let change_keys = (raw, { yaml, console, notify }, { url, name }) => {
       delete rawObj['Proxy Group'];
       delete rawObj['Proxy'];
       var data = yaml.stringify({ ...rawObj, proxies, 'proxy-groups': groups, rules });
-    } else if (rawObj['rules'] && rawObj['proxy-groups'] && rawObj['proxies']) {
+    } else if (
+      rawObj['rules'] &&
+      rawObj['proxy-groups'] &&
+      Object.prototype.hasOwnProperty.call(rawObj, 'proxies')
+    ) {
       console.log(`[info]: found new keys in ${name} yaml`);
     } else throw Error(`keys in ${name} not found`);
     console.log(`[info]: change keys of ${name} completely`);
