@@ -82,6 +82,18 @@ merge_nodes:
     keys:
       - ITA
       - 意大利
+  - name: 🇬🇧 英国
+    keys:
+      - GBR
+      - 英国
+  - name: 🇨🇦 加拿大
+    keys:
+      - CAN
+      - 加拿大
+  - name: 🇪🇪 爱沙尼亚
+    keys:
+      - EST
+      - 爱沙尼亚
   - name: 🎶 MUSIC
     keys:
       - MUSIC
