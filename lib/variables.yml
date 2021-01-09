@@ -82,15 +82,15 @@ merge_nodes:
     keys:
       - ITA
       - 意大利
-  - name: 🇬🇧 英国
+  - name: 🇬🇧 GBR
     keys:
       - GBR
       - 英国
-  - name: 🇨🇦 加拿大
+  - name: 🇨🇦 CAN
     keys:
       - CAN
       - 加拿大
-  - name: 🇪🇪 爱沙尼亚
+  - name: 🇪🇪 EST
     keys:
       - EST
       - 爱沙尼亚
