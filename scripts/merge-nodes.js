@@ -79,17 +79,16 @@ let merge_nodes = async (raw, { yaml, console, notify }, { url, name }) => {
         if (debug) console.log(`[debug]: proxy['name']: ${proxy['name']}`);
         let check = false;
         for (let i = 0; i < variables.length; i++) {
-          if (debug) console.log(`[debug]: variables[${i}]: ${variables[i]}`);
+          if (debug) console.log(`[debug]: variables[${i}]: ${JSON.stringify(variables[i])}`);
           variables[i]['keys'].forEach(key => {
             if (proxy['name'].search(key) != -1) {
-              if (debug) console.log(`[debug]: add ${proxy['name']} into ${variables[i]['name']}`);
+              if (debug) console.log(`[debug]: add ${proxy['name']} into ${_other[i]['name']}`);
               _other[i]['proxies'].push(proxy['name']);
               check = true;
             }
           });
           if (i === variables.length - 1 && check === false) {
-            if (debug)
-              console.log(`[debug]: add ${proxy['name']} into ${variables[i + 1]['name']}`);
+            if (debug) console.log(`[debug]: add ${proxy['name']} into ${_other[i + 1]['name']}`);
             _other[i + 1]['proxies'].push(proxy['name']);
           }
         }
