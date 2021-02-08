@@ -5,3 +5,16 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
+    assignees:
+      - 'yi-Xu-0100'
+    commit-message:
+      prefix: '⬆ '
+  # Maintain dependencies for npm
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: daily
+    assignees:
+      - 'yi-Xu-0100'
+    commit-message:
+      prefix: '⬆ '
