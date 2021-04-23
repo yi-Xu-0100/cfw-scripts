@@ -54,7 +54,7 @@ jobs:
         with:
           result-encoding: string
           script: |
-            const compareVersions = require(`${process.env.GITHUB_WORKSPACE}/node_modules/compare-versions`);
+            const compareVersions = require('compare-versions');
             var currentVersion = `${process.env.currentVersion}`;
             var latestRelease = `${process.env.latestRelease}`;
             return compareVersions.compare(currentVersion, latestRelease, ">");
