@@ -14,22 +14,6 @@ Some scripts for [`parser`](https://docs.cfw.lbyczf.com/contents/parser.html) in
 
 **Only for studying and testing usage, and delete code yourself with the usage completed. Thanks!** 😜
 
-## 🎨 Table of Contents
-
-- [🎨 Table of Contents](#-table-of-contents)
-- [🚀 Usage](#-usage)
-  - [📝 setup repository with git and npm](#-setup-repository-with-git-and-npm)
-  - [📝 Setup parser for `change-keys.js`](#-setup-parser-for-change-keysjs)
-  - [📝 Setup parser for `change-rules.js`](#-setup-parser-for-change-rulesjs)
-  - [📝 Setup parser for `merge-nodes.js`](#-setup-parser-for-merge-nodesjs)
-  - [📝 Setup parser for `auto-check-in.js`](#-setup-parser-for-auto-check-injs)
-  - [📝 Setup parser for `subs-info-parser.js`](#-setup-parser-for-subs-info-parserjs)
-- [📝 Scripts](#-scripts)
-- [🍱 Libraries](#-libraries)
-- [🔊 CHANGELOG](#-changelog)
-- [📄 LICENSE](#-license)
-- [🎉 Thanks](#-thanks)
-
 ## 🚀 Usage
 
 ### 📝 setup repository with git and npm
@@ -109,6 +93,10 @@ parsers:
 **It will add fake node into `proxies` and add `SUBS-INFO` into the end of `proxy-groups`. Be careful to edit the subscription later.**
 
 You can set `current` and `expire` in `./scripts/variables.yml` with `subs_info_config`. The `current` for controlling whether the subscription information of current URL showing, and The `expire` for controlling whether the expiry time of subscription information showing.(The subscription information of domains in variables will all show. See in[example](https://github.com/yi-Xu-0100/cfw-scripts/tree/main/lib/variables.js))
+
+### 📝 Setup `Enhanced Tray` for `info.js`
+
+The script was used to get CPU and memory usage. And it will display the two pieces of information in a separate line.
 
 ## 📝 Scripts
 
