@@ -98,21 +98,35 @@ You can set `current` and `expire` in `./scripts/variables.yml` with `subs_info_
 
 The script was used to get CPU and memory usage. And it will display the two pieces of information in a separate line.
 
+### 📝 Append traffic data with `subscription-userinfo.js`
+
+The script was used to get subscription-userinfo from subscription url with different ua of `User-Agent:Quantumult%20X/1.0.23 (iPhone12,3; iOS 14.6)`.
+
+You can set the parser with `reg` to fit the all link after other parser.
+
+```yml
+parsers:
+  - reg: ^.*$
+    file: 'D:/Applications/cfw-scripts/scripts/subscription-userinfo.js' #set the path of `subscription-userinfo.js`.
+```
+
 ## 📝 Scripts
 
-|         name          |         description          |    variables     |
-| :-------------------: | :--------------------------: | :--------------: |
-|   [change-keys.js]    |     fit new version key      |                  |
-|   [change-rules.js]   |      add personal rule       |                  |
-|   [merge-nodes.js]    |         merge nodes          |   merge-nodes    |
-| [subs-info-parser.js] | get subscription information | subs-info-parser |
-|  [auto-check-in.js]   |        auto check in         |  auto-check-in   |
+|            name            |         description          |    variables     |
+| :------------------------: | :--------------------------: | :--------------: |
+|      [change-keys.js]      |     fit new version key      |                  |
+|     [change-rules.js]      |      add personal rule       |                  |
+|      [merge-nodes.js]      |         merge nodes          |   merge-nodes    |
+|   [subs-info-parser.js]    | get subscription information | subs-info-parser |
+|     [auto-check-in.js]     |        auto check in         |  auto-check-in   |
+| [subscription-userinfo.js] | get subscription information |                  |
 
 [change-keys.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/change-keys.js
 [change-rules.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/change-rules.js
 [merge-nodes.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/merge-nodes.js
 [subs-info-parser.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/subs-info-parser.js
 [auto-check-in.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/auto-check-in.js
+[subscription-userinfo.js]: https://github.com/yi-Xu-0100/cfw-scripts/tree/main/scripts/subscription-userinfo.js
 
 ## 🍱 Libraries
 
