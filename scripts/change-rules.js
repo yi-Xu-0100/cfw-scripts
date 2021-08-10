@@ -50,9 +50,21 @@ let change_rules = (raw, { yaml, console, notify }, { name, url }) => {
     console.log(`[info]: start change rules at ${new Date()}`);
     delete rawObj['proxy-groups'];
     delete rawObj['rules'];
-    for (let i = 0; i < rawObj['proxies'].length; i++) {
-      rule_providers['proxy-groups'][0]['proxies'].push(rawObj['proxies'][i].name);
-      rule_providers['proxy-groups'][1]['proxies'].push(rawObj['proxies'][i].name);
+    if (rawObj['proxies']) {
+      console.log(`[info]: append proxies at ${new Date()}`);
+      for (let i = 0; i < rawObj['proxies'].length; i++) {
+        rule_providers['proxy-groups'][0]['proxies'].push(rawObj['proxies'][i].name);
+        rule_providers['proxy-groups'][1]['proxies'].push(rawObj['proxies'][i].name);
+      }
+    } else {
+      console.log(`[info]: append proxy-providers at ${new Date()}`);
+      rule_providers['proxy-groups'][0]['use'] = [];
+      rule_providers['proxy-groups'][1]['use'] = [];
+      delete rule_providers['proxy-groups'][1]['proxies'];
+      for (let i = 0; i < Object.keys(rawObj['proxy-providers']).length; i++) {
+        rule_providers['proxy-groups'][0]['use'].push(Object.keys(rawObj['proxy-providers'])[i]);
+        rule_providers['proxy-groups'][1]['use'].push(Object.keys(rawObj['proxy-providers'])[i]);
+      }
     }
     rule_providers['proxy-groups'][0]['proxies'].unshift('DIRECT', '♻️ AUTO');
     console.log('[info]: proxy-groups:');
