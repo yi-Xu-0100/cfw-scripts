@@ -43,7 +43,7 @@
   },
   "homepage": "https://github.com/yi-Xu-0100/cfw-scripts#readme",
   "dependencies": {
-    "node-notifier": "^10.0.0"
+    "node-notifier": "^10.0.1"
   },
   "devDependencies": {
     "eslint": "^8.7.0",
