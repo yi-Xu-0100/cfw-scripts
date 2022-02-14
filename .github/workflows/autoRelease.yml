@@ -19,7 +19,7 @@ jobs:
         run: npm install compare-versions
 
       - name: Get latest release
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         id: get-latest-release
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -46,7 +46,7 @@ jobs:
           path: ./CHANGELOG.md
 
       - name: Compare version
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         id: comparison
         env:
           currentVersion: ${{ steps.changelog-reader.outputs.version }}
