@@ -9,7 +9,7 @@ async function run() {
       copyFileSync('./lib/variables.yml', './scripts/variables.yml');
       console.log('[info]: Start copy ./lib/variables.yml to ./scripts/variables.yml');
     }
-    if (existsSync('./lib/rule-providers.yml')) throw Error('rule-providers.yml occupied error');
+    if (existsSync('./scripts/rule-providers.yml')) throw Error('rule-providers.yml occupied error');
     else {
       copyFileSync('./lib/rule-providers.yml', './scripts/rule-providers.yml');
       console.log('[info]: Start copy ./lib/rule-providers.yml to ./scripts/rule-providers.yml');
