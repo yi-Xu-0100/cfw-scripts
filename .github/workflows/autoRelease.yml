@@ -41,7 +41,7 @@ jobs:
 
       - name: Get changelog
         id: changelog-reader
-        uses: mindsers/changelog-reader-action@v2.1.1
+        uses: mindsers/changelog-reader-action@v2.2.0
         with:
           path: ./CHANGELOG.md
 
